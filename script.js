@@ -54,6 +54,21 @@ let contador = 0;
 
 
 /* =========================
+   PORCENTAJES
+========================= */
+
+const porcentajes = [
+    15,
+    28,
+    41,
+    55,
+    70,
+    85,
+    100
+];
+
+
+/* =========================
    ANIMACIONES
 ========================= */
 
@@ -74,34 +89,35 @@ const animaciones = [
 
 corazon.addEventListener("click", () => {
 
-    /* Última etapa:
-       después de los 7 mensajes,
-       comienza la carga.
+    /*
+       Después de mostrar los 7 mensajes,
+       el siguiente toque será el "último toque".
     */
 
     if (contador >= mensajes.length) {
 
-        cargarCorazon();
+        transicionarEscena();
 
         return;
     }
 
 
-    /* Mostrar mensaje */
+    /* =====================
+       MOSTRAR MENSAJE
+    ===================== */
 
     mensaje.textContent = mensajes[contador];
 
     mensaje.classList.remove("visible");
-
-    /* Forzamos una pequeña espera
-       para que la animación se reinicie */
 
     setTimeout(() => {
         mensaje.classList.add("visible");
     }, 50);
 
 
-    /* Animación */
+    /* =====================
+       ANIMAR CORAZÓN
+    ===================== */
 
     corazon.classList.remove(
         "latido",
@@ -116,10 +132,32 @@ corazon.addEventListener("click", () => {
     );
 
 
+    /* =====================
+       ACTUALIZAR PROGRESO
+    ===================== */
+
+    progresoContainer.classList.remove("oculto");
+
+    const progreso = porcentajes[contador];
+
+    barraProgreso.style.width =
+        progreso + "%";
+
+    porcentaje.textContent =
+        progreso + "%";
+
+
+    /* =====================
+       SIGUIENTE PASO
+    ===================== */
+
     contador++;
 
 
-    /* Cuando aparecen los 7 mensajes */
+    /*
+       Después del séptimo mensaje
+       dejamos preparado el último toque.
+    */
 
     if (contador === mensajes.length) {
 
@@ -128,72 +166,10 @@ corazon.addEventListener("click", () => {
             instruccion.textContent =
                 "Toca por última vez ❤️";
 
-            progresoContainer.classList.remove(
-                "oculto"
-            );
-
         }, 600);
     }
 
 });
-
-
-/* =========================
-   CARGA DEL CORAZÓN
-========================= */
-
-function cargarCorazon() {
-
-    const porcentajes = [
-        15,
-        36,
-        58,
-        79,
-        100
-    ];
-
-    let paso = 0;
-
-
-    /* Desactivamos temporalmente el botón */
-
-    corazon.disabled = true;
-
-
-    const intervalo = setInterval(() => {
-
-        const valor = porcentajes[paso];
-
-        barraProgreso.style.width =
-            valor + "%";
-
-        porcentaje.textContent =
-            valor + "%";
-
-
-        /* El corazón crece */
-
-        const escala =
-            1 + (valor / 100) * 0.5;
-
-        corazon.style.transform =
-            `scale(${escala})`;
-
-
-        paso++;
-
-
-        if (paso >= porcentajes.length) {
-
-            clearInterval(intervalo);
-
-            setTimeout(() => {
-                transicionarEscena();
-            }, 700);
-        }
-
-    }, 500);
-}
 
 
 /* =========================
@@ -202,8 +178,20 @@ function cargarCorazon() {
 
 function transicionarEscena() {
 
+    /* Desactivamos el corazón normal */
+
+    corazon.disabled = true;
+
+
+    /* Mostramos el corazón gigante */
+
     corazonFinal.classList.remove("oculto");
 
+
+    /*
+       Esperamos mientras el corazón
+       crece y cubre la pantalla.
+    */
 
     setTimeout(() => {
 
@@ -213,6 +201,11 @@ function transicionarEscena() {
 
     }, 1000);
 
+
+    /*
+       Quitamos la capa del corazón
+       cuando termina la animación.
+    */
 
     setTimeout(() => {
 
