@@ -32,8 +32,7 @@ body {
 
     color: #62454a;
 
-    background:
-        #fff8f7;
+    background: #fff8f7;
 
     overflow-x: hidden;
 
@@ -41,7 +40,7 @@ body {
 
 
 /* =====================================================
-   ELEMENTO OCULTO
+   ELEMENTOS OCULTOS
 ===================================================== */
 
 .oculto {
@@ -52,7 +51,7 @@ body {
 
 
 /* =====================================================
-   TEXTURA GENERAL DE PAPEL
+   TEXTURA DE PAPEL
 ===================================================== */
 
 body::before {
@@ -67,9 +66,10 @@ body::before {
 
     z-index: 9999;
 
-    opacity: .12;
+    opacity: .10;
 
     background-image:
+
         radial-gradient(
             rgba(130, 80, 80, .25) 1px,
             transparent 1px
@@ -158,7 +158,10 @@ body::before {
 
 .contenido-inicial h1 {
 
-    margin: 0 0 20px;
+    margin:
+        0
+        0
+        20px;
 
     font-size:
         clamp(
@@ -185,7 +188,7 @@ body::before {
 
 
 /* =====================================================
-   DECORACIONES CORAZÓN
+   DECORACIONES
 ===================================================== */
 
 .decoracion-corazon {
@@ -206,7 +209,8 @@ body::before {
 
     top: 25%;
 
-    transform: rotate(-20deg);
+    transform:
+        rotate(-20deg);
 
 }
 
@@ -216,7 +220,8 @@ body::before {
 
     top: 40%;
 
-    transform: rotate(15deg);
+    transform:
+        rotate(15deg);
 
 }
 
@@ -232,7 +237,7 @@ body::before {
 
 
 /* =====================================================
-   CORAÇÃO PRINCIPAL
+   CORAZÓN PRINCIPAL
 ===================================================== */
 
 #corazon {
@@ -262,11 +267,18 @@ body::before {
     filter:
         drop-shadow(
             0 15px 15px
-            rgba(150, 65, 85, .18)
+            rgba(
+                150,
+                65,
+                85,
+                .18
+            )
         );
 
     transition:
+
         transform .25s ease,
+
         filter .25s ease;
 
 }
@@ -275,12 +287,6 @@ body::before {
 
     transform:
         scale(1.08);
-
-    filter:
-        drop-shadow(
-            0 20px 20px
-            rgba(150, 65, 85, .22)
-        );
 
 }
 
@@ -438,7 +444,7 @@ body::before {
 
 
 /* =====================================================
-   PROGRESO
+   BARRA DE PROGRESO
 ===================================================== */
 
 #progreso-container {
@@ -472,6 +478,7 @@ body::before {
     height: 100%;
 
     background:
+
         linear-gradient(
             90deg,
             #e59aaa,
@@ -654,7 +661,9 @@ body::before {
 
     color: #c77986;
 
-    margin: 15px 0;
+    margin:
+        15px
+        0;
 
 }
 
@@ -750,6 +759,7 @@ body::before {
         18px;
 
     box-shadow:
+
         0 15px 30px
         rgba(
             90,
@@ -792,37 +802,20 @@ body::before {
 
 }
 
-.foto-placeholder {
+
+/* =====================================================
+   FOTOS REALES
+===================================================== */
+
+.polaroid img {
+
+    display: block;
+
+    width: 100%;
 
     height: 260px;
 
-    background:
-
-        linear-gradient(
-            145deg,
-            #ead3d6,
-            #f5e4e5
-        );
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    flex-direction: column;
-
-    color: #a87880;
-
-    font-size: 1rem;
-
-}
-
-.icono-foto {
-
-    font-size: 2rem;
-
-    margin-bottom: 8px;
+    object-fit: cover;
 
 }
 
@@ -843,7 +836,7 @@ body::before {
 
 
 /* =====================================================
-   CINTA ADHESIVA
+   CINTA
 ===================================================== */
 
 .cinta {
@@ -874,7 +867,12 @@ body::before {
 
     box-shadow:
         0 2px 5px
-        rgba(80,50,40,.08);
+        rgba(
+            80,
+            50,
+            40,
+            .08
+        );
 
 }
 
@@ -911,7 +909,8 @@ body::before {
 
     background: #bd707c;
 
-    transform: scale(1.2);
+    transform:
+        scale(1.2);
 
 }
 
@@ -960,10 +959,11 @@ body::before {
 
     position: relative;
 
-    width: min(
-        100%,
-        560px
-    );
+    width:
+        min(
+            100%,
+            560px
+        );
 
     height: 300px;
 
@@ -972,13 +972,20 @@ body::before {
     filter:
         drop-shadow(
             0 18px 22px
-            rgba(90,50,50,.15)
+            rgba(
+                90,
+                50,
+                50,
+                .15
+            )
         );
 
 }
 
 
-/* Corpo do envelope */
+/* =====================================================
+   CUERPO DEL SOBRE
+===================================================== */
 
 .cuerpo-sobre {
 
@@ -1008,9 +1015,6 @@ body::before {
     overflow: hidden;
 
 }
-
-
-/* Laterales decorativos */
 
 .cuerpo-sobre::before {
 
@@ -1071,7 +1075,9 @@ body::before {
 }
 
 
-/* Solapa */
+/* =====================================================
+   SOLAPA DEL SOBRE
+===================================================== */
 
 .solapa {
 
@@ -1108,7 +1114,21 @@ body::before {
 }
 
 
-/* Sello */
+/* =====================================================
+   ANIMACIÓN SOBRE ABIERTO
+===================================================== */
+
+.sobre.abriendo .solapa {
+
+    transform:
+        rotateX(180deg);
+
+}
+
+
+/* =====================================================
+   SELLO
+===================================================== */
 
 .sello {
 
@@ -1119,7 +1139,7 @@ body::before {
     top: 52%;
 
     transform:
-        translate(-50%,-50%);
+        translate(-50%, -50%);
 
     width: 95px;
 
@@ -1141,7 +1161,9 @@ body::before {
 
     color: #fff5e8;
 
-    font-family: Georgia, serif;
+    font-family:
+        Georgia,
+        serif;
 
     font-size: .8rem;
 
@@ -1194,25 +1216,15 @@ body::before {
 .sello:hover {
 
     transform:
-        translate(-50%,-50%)
+        translate(-50%, -50%)
         scale(1.06);
-
-    box-shadow:
-
-        0 10px 18px
-        rgba(
-            100,
-            40,
-            40,
-            .3
-        );
 
 }
 
 .sello:active {
 
     transform:
-        translate(-50%,-50%)
+        translate(-50%, -50%)
         scale(.95);
 
 }
@@ -1306,10 +1318,11 @@ body::before {
 
     position: relative;
 
-    width: min(
-        100%,
-        650px
-    );
+    width:
+        min(
+            100%,
+            650px
+        );
 
     margin: auto;
 
@@ -1636,10 +1649,11 @@ body::before {
 
     position: relative;
 
-    width: min(
-        100%,
-        520px
-    );
+    width:
+        min(
+            100%,
+            520px
+        );
 
     margin: auto;
 
@@ -1648,6 +1662,7 @@ body::before {
     background: #fffdfb;
 
     box-shadow:
+
         0 15px 35px
         rgba(
             80,
@@ -1661,35 +1676,15 @@ body::before {
 
 }
 
-.imagen-placeholder {
+.imagen-final img {
+
+    display: block;
+
+    width: 100%;
 
     height: 390px;
 
-    background:
-
-        linear-gradient(
-            145deg,
-            #ead3d6,
-            #f5e4e5
-        );
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    flex-direction: column;
-
-    color: #a87880;
-
-}
-
-.imagen-placeholder span {
-
-    font-size: 2.5rem;
-
-    margin-bottom: 10px;
+    object-fit: cover;
 
 }
 
@@ -1748,14 +1743,7 @@ body::before {
     }
 
 
-    .contenido-escena2 {
-
-        max-width: 100%;
-
-    }
-
-
-    /* Galería */
+    /* GALERÍA */
 
     .galeria {
 
@@ -1774,14 +1762,14 @@ body::before {
 
     }
 
-    .foto-placeholder {
+    .polaroid img {
 
         height: 300px;
 
     }
 
 
-    /* Sobre */
+    /* SOBRE */
 
     .sobre {
 
@@ -1813,7 +1801,7 @@ body::before {
     }
 
 
-    /* Carta */
+    /* CARTA */
 
     .papel-carta {
 
@@ -1833,7 +1821,7 @@ body::before {
     }
 
 
-    /* Cierre */
+    /* CIERRE */
 
     .cierre {
 
@@ -1852,7 +1840,7 @@ body::before {
 
     }
 
-    .imagen-placeholder {
+    .imagen-final img {
 
         height: 320px;
 
