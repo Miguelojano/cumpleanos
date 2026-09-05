@@ -1,0 +1,510 @@
+/* =========================
+   CONFIGURACIÓN GENERAL
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    background: #fff7f8;
+    color: #5a3d42;
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   ESCENAS
+========================= */
+
+.escena {
+    min-height: 100vh;
+    width: 100%;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px 20px;
+}
+
+.escena.activa {
+    display: flex;
+}
+
+
+/* =========================
+   ESCENA 1
+========================= */
+
+#escena1 {
+    background:
+        radial-gradient(
+            circle at center,
+            #fffafa 0%,
+            #ffeef2 100%
+        );
+}
+
+.contenido-inicial {
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.contenido-inicial h1 {
+    font-size: clamp(2rem, 8vw, 4rem);
+    font-weight: normal;
+    margin: 0 0 25px;
+    color: #8c5360;
+}
+
+#instruccion {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    color: #79555c;
+}
+
+
+/* =========================
+   CORAZÓN
+========================= */
+
+#corazon {
+    border: none;
+    background: transparent;
+    padding: 10px;
+
+    font-size: clamp(5rem, 25vw, 9rem);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        filter 0.25s ease;
+}
+
+#corazon:hover {
+    transform: scale(1.08);
+}
+
+#corazon:active {
+    transform: scale(0.85);
+}
+
+
+/* Animaciones del corazón */
+
+.latido {
+    animation: latido 0.6s ease;
+}
+
+.corazon-fuerte {
+    animation: latidoFuerte 0.8s ease;
+}
+
+.corazon-brillo {
+    animation: brillo 0.8s ease;
+}
+
+@keyframes latido {
+
+    0% {
+        transform: scale(1);
+    }
+
+    35% {
+        transform: scale(1.3);
+    }
+
+    65% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes latidoFuerte {
+
+    0% {
+        transform: scale(1);
+    }
+
+    30% {
+        transform: scale(1.5);
+    }
+
+    60% {
+        transform: scale(0.85);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes brillo {
+
+    0% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+
+    50% {
+        transform: scale(1.25);
+        filter: brightness(1.8);
+    }
+
+    100% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+}
+
+
+/* =========================
+   MENSAJES
+========================= */
+
+.mensaje {
+    min-height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 15px;
+
+    font-size: 1.15rem;
+    line-height: 1.6;
+
+    color: #704850;
+
+    opacity: 0;
+    transform: translateY(10px);
+
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
+}
+
+.mensaje.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* =========================
+   BARRA DE PROGRESO
+========================= */
+
+.oculto {
+    display: none !important;
+}
+
+#progreso-container {
+    margin-top: 20px;
+}
+
+.barra {
+    width: 80%;
+    max-width: 300px;
+    height: 10px;
+
+    margin: 0 auto 10px;
+
+    background: #f1d7dc;
+
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+#barra-progreso {
+    width: 0%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        #e89aa9,
+        #d86b82
+    );
+
+    border-radius: 20px;
+
+    transition: width 0.5s ease;
+}
+
+#porcentaje {
+    font-size: 0.9rem;
+    color: #96636d;
+}
+
+
+/* =========================
+   CORAZÓN GIGANTE FINAL
+========================= */
+
+.corazon-final {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #fff7f8;
+
+    font-size: 30vw;
+
+    pointer-events: none;
+
+    animation: corazonGigante 2.2s ease forwards;
+}
+
+@keyframes corazonGigante {
+
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    30% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    65% {
+        transform: scale(4);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(15);
+        opacity: 0;
+    }
+}
+
+
+/* =========================
+   ESCENA 2
+========================= */
+
+#escena2 {
+    background:
+        linear-gradient(
+            180deg,
+            #fff8f9,
+            #fff0f3
+        );
+}
+
+.contenido-escena2 {
+    width: 100%;
+    max-width: 650px;
+
+    text-align: center;
+}
+
+.contenido-escena2 h2 {
+    font-size: clamp(1.8rem, 7vw, 3rem);
+    font-weight: normal;
+
+    line-height: 1.3;
+
+    color: #814b58;
+
+    margin-bottom: 15px;
+}
+
+.fecha {
+    font-size: 1.1rem;
+    color: #a66a76;
+
+    margin-bottom: 40px;
+}
+
+
+/* =========================
+   GALERÍA
+========================= */
+
+.galeria {
+    display: flex;
+
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+
+    gap: 15px;
+
+    padding: 10px 5px 20px;
+
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: none;
+}
+
+.galeria::-webkit-scrollbar {
+    display: none;
+}
+
+.foto {
+    flex: 0 0 90%;
+
+    scroll-snap-align: center;
+}
+
+.foto-placeholder {
+    height: 360px;
+
+    border-radius: 20px;
+
+    background: #f8dfe4;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+
+    color: #a36b75;
+
+    font-size: 1.2rem;
+
+    box-shadow:
+        0 10px 30px rgba(120, 60, 70, 0.12);
+}
+
+
+/* =========================
+   CARTA
+========================= */
+
+.seccion-carta {
+    margin-top: 50px;
+
+    padding-bottom: 50px;
+}
+
+.texto-carta-intro {
+    font-size: 1.2rem;
+
+    color: #79515a;
+
+    margin-bottom: 20px;
+}
+
+#boton-carta {
+    border: none;
+
+    background: #d9788d;
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 1rem;
+
+    padding: 14px 25px;
+
+    border-radius: 30px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px rgba(150, 70, 90, 0.2);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+#boton-carta:hover {
+    background: #c9667c;
+    transform: translateY(-2px);
+}
+
+#boton-carta:active {
+    transform: scale(0.95);
+}
+
+
+/* =========================
+   CARTA ABIERTA
+========================= */
+
+.carta {
+    max-height: 0;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    transform: translateY(20px);
+
+    transition:
+        max-height 1s ease,
+        opacity 0.8s ease,
+        transform 0.8s ease;
+
+    margin-top: 25px;
+}
+
+.carta.abierta {
+    max-height: 1000px;
+
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+.papel {
+    background: #fffdf7;
+
+    padding: 35px 25px;
+
+    border-radius: 5px;
+
+    box-shadow:
+        0 10px 30px rgba(90, 50, 50, 0.15);
+
+    text-align: left;
+
+    line-height: 1.8;
+
+    font-size: 1.05rem;
+
+    white-space: pre-line;
+}
+
+
+/* =========================
+   CORAZONCITOS DECORATIVOS
+========================= */
+
+@media (max-width: 600px) {
+
+    .foto-placeholder {
+        height: 300px;
+    }
+
+    .papel {
+        padding: 28px 20px;
+    }
+
+}
