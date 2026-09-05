@@ -609,10 +609,14 @@ body {
 
 
 /* =====================================================
-   ESCENA 3
+   CIERRE - CONTINUIDAD DE LA PÁGINA
 ===================================================== */
 
-#escena3 {
+.cierre {
+
+    width: 100%;
+
+    padding: 100px 20px 80px;
 
     background:
         radial-gradient(
@@ -622,11 +626,13 @@ body {
         );
 }
 
-.contenido-escena3 {
+.contenido-cierre {
 
     width: 100%;
 
     max-width: 650px;
+
+    margin: 0 auto;
 
     text-align: center;
 
@@ -654,10 +660,22 @@ body {
 
     font-size: 4rem;
 
-    margin-bottom: 50px;
+    margin-bottom: 70px;
 
-    animation:
-        aparecerAbrazo 1s ease;
+    opacity: 0;
+
+    transform: translateY(35px) scale(0.9);
+
+    transition:
+        opacity 0.9s ease,
+        transform 0.9s ease;
+}
+
+.abrazo.visible {
+
+    opacity: 1;
+
+    transform: translateY(0) scale(1);
 }
 
 .persona {
@@ -747,7 +765,6 @@ body {
     color: #814b58;
 
     margin:
-
         0
         0
         40px;
@@ -838,6 +855,11 @@ body {
 ===================================================== */
 
 @media (max-width: 600px) {
+
+    .cierre {
+
+        padding: 80px 20px 60px;
+    }
 
     .foto-placeholder {
 
