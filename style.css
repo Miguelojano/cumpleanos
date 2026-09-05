@@ -1,42 +1,374 @@
-/* =====================================================
-   TÍTULO FINAL
-===================================================== */
+/* =========================
+   CONFIGURACIÓN GENERAL
+========================= */
 
-.titulo-final {
-
-    font-size:
-        clamp(2rem, 8vw, 3.5rem);
-
-    font-weight: normal;
-
-    line-height: 1.3;
-
-    color: #814b58;
-
-    margin:
-        0
-        0
-        40px;
-
-    /* Oculto inicialmente */
-
-    opacity: 0;
-
-    transform: translateY(25px);
-
-    transition:
-        opacity 1.2s ease,
-        transform 1.2s ease;
+*{
+    box-sizing:border-box;
 }
 
+html,body{
+    margin:0;
+    padding:0;
+    width:100%;
+    min-height:100%;
+}
 
-/*
-   Aparece después de abrir la carta
-*/
+body{
+    font-family:Georgia,"Times New Roman",serif;
+    background:#fff7f8;
+    color:#5a3d42;
+    overflow-x:hidden;
+}
 
-.titulo-final.visible {
+/* =========================
+   ESCENAS
+========================= */
 
-    opacity: 1;
+.escena{
+    min-height:100vh;
+    width:100%;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:30px 20px;
+}
 
-    transform: translateY(0);
+.escena.activa{
+    display:flex;
+}
+
+/* =========================
+   ESCENA 1
+========================= */
+
+#escena1{
+    background:radial-gradient(circle,#fffafa,#ffeef2);
+}
+
+.contenido-inicial{
+    width:100%;
+    max-width:500px;
+    text-align:center;
+}
+
+h1{
+    color:#8c5360;
+    font-size:clamp(2rem,8vw,4rem);
+    font-weight:normal;
+}
+
+#instruccion{
+    color:#79555c;
+    margin-bottom:25px;
+}
+
+#corazon{
+    border:none;
+    background:none;
+    font-size:clamp(5rem,25vw,9rem);
+    cursor:pointer;
+    transition:.25s;
+    -webkit-tap-highlight-color:transparent;
+    touch-action:manipulation;
+}
+
+#corazon:hover{transform:scale(1.08);}
+#corazon:active{transform:scale(.85);}
+
+.latido{animation:latido .6s;}
+.corazon-fuerte{animation:latidoFuerte .8s;}
+.corazon-brillo{animation:brillo .8s;}
+
+@keyframes latido{
+0%{transform:scale(1);}
+35%{transform:scale(1.3);}
+65%{transform:scale(.9);}
+100%{transform:scale(1);}
+}
+
+@keyframes latidoFuerte{
+0%{transform:scale(1);}
+30%{transform:scale(1.5);}
+60%{transform:scale(.85);}
+100%{transform:scale(1);}
+}
+
+@keyframes brillo{
+0%{transform:scale(1);}
+50%{transform:scale(1.25);filter:brightness(1.8);}
+100%{transform:scale(1);}
+}
+
+/* =========================
+   MENSAJE
+========================= */
+
+.mensaje{
+    min-height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    opacity:0;
+    transform:translateY(10px);
+    transition:.5s;
+}
+
+.mensaje.visible{
+    opacity:1;
+    transform:none;
+}
+
+/* =========================
+   BARRA
+========================= */
+
+.oculto{display:none!important;}
+
+.barra{
+    width:80%;
+    max-width:300px;
+    height:10px;
+    margin:auto;
+    background:#f1d7dc;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+#barra-progreso{
+    width:0;
+    height:100%;
+    background:linear-gradient(90deg,#e89aa9,#d86b82);
+    transition:.5s;
+}
+
+#porcentaje{
+    display:block;
+    text-align:center;
+    margin-top:8px;
+    color:#96636d;
+}
+
+/* =========================
+   CORAZÓN GIGANTE
+========================= */
+
+.corazon-final{
+    position:fixed;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#fff7f8;
+    font-size:30vw;
+    z-index:1000;
+    animation:corazonGigante 2.2s forwards;
+}
+
+@keyframes corazonGigante{
+0%{transform:scale(0);opacity:0;}
+30%{transform:scale(1);opacity:1;}
+65%{transform:scale(4);}
+100%{transform:scale(15);opacity:0;}
+}
+
+/* =========================
+   CUMPLEAÑOS
+========================= */
+
+#escena2{
+    background:linear-gradient(#fff8f9,#fff0f3);
+}
+
+.contenido-escena2{
+    width:100%;
+    max-width:650px;
+    text-align:center;
+}
+
+h2{
+    color:#814b58;
+    font-weight:normal;
+    line-height:1.3;
+}
+
+.fecha{
+    color:#a66a76;
+    margin-bottom:35px;
+}
+
+/* =========================
+   GALERÍA
+========================= */
+
+.galeria{
+    display:flex;
+    gap:15px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    padding-bottom:20px;
+    scrollbar-width:none;
+}
+
+.galeria::-webkit-scrollbar{display:none;}
+
+.foto{
+    flex:0 0 90%;
+    scroll-snap-align:center;
+}
+
+.foto-placeholder{
+    height:340px;
+    border-radius:20px;
+    background:#f8dfe4;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+}
+
+/* =========================
+   CARTA
+========================= */
+
+.seccion-carta{
+    margin-top:50px;
+    padding-bottom:50px;
+}
+
+#boton-carta{
+    border:none;
+    background:#d9788d;
+    color:#fff;
+    border-radius:30px;
+    padding:14px 25px;
+    cursor:pointer;
+    font-family:inherit;
+}
+
+.carta{
+    max-height:0;
+    overflow:hidden;
+    opacity:0;
+    transform:translateY(20px);
+    transition:1s;
+    margin-top:25px;
+}
+
+.carta.abierta{
+    max-height:520px;
+    opacity:1;
+    transform:none;
+}
+
+.papel{
+    background:#fffdf7;
+    padding:30px 25px;
+    border-radius:6px;
+    line-height:1.8;
+    max-height:430px;
+    overflow:auto;
+    text-align:left;
+}
+
+/* =========================
+   CIERRE
+========================= */
+
+.cierre{
+    width:100%;
+    padding:90px 20px 80px;
+    background:radial-gradient(circle,#fffafa,#ffeef2);
+}
+
+.contenido-cierre{
+    width:100%;
+    max-width:650px;
+    margin:auto;
+    text-align:center;
+}
+
+/* =========================
+   ABRAZO
+========================= */
+
+.abrazo{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+    font-size:4rem;
+    margin-bottom:60px;
+    opacity:0;
+    transform:translateY(35px);
+    transition:1s;
+}
+
+.abrazo.visible{
+    opacity:1;
+    transform:none;
+}
+
+.persona{
+    animation:abrazoPersona 2s infinite ease-in-out;
+}
+
+.corazon-abrazo{
+    animation:latidoAbrazo 1s infinite;
+}
+
+@keyframes abrazoPersona{
+0%,100%{transform:translateX(0);}
+50%{transform:translateX(10px);}
+}
+
+@keyframes latidoAbrazo{
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.3);}
+}
+
+/* =========================
+   TÍTULO FINAL
+========================= */
+
+.titulo-final{
+    font-size:clamp(2rem,8vw,3.5rem);
+    color:#814b58;
+    margin-bottom:40px;
+
+    /* oculto al inicio */
+    opacity:0;
+    transform:translateY(25px);
+    transition:1.2s;
+}
+
+.titulo-final.visible{
+    opacity:1;
+    transform:none;
+}
+
+/* =========================
+   IMAGEN FINAL
+========================= */
+
+.imagen-final{
+    max-width:500px;
+    margin:auto;
+}
+
+.imagen-placeholder{
+    height:380px;
+    border-radius:20px;
+    background:#f8dfe4;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+}
+
+@media(max-width:600px){
+
+.foto-placeholder{height:280px;}
+.abrazo{font-size:3rem;}
+.imagen-placeholder{height:300px;}
+
 }
