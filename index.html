@@ -1,43 +1,73 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Para ti ❤️</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 
+
 <body>
+
 
     <!-- =====================================================
          ESCENA 1 - EL CORAZÓN
     ====================================================== -->
 
-    <section id="escena1" class="escena activa">
+    <section
+        id="escena1"
+        class="escena activa"
+    >
 
         <div class="contenido-inicial">
 
-            <h1>[NOMBRE]</h1>
+            <h1>
+                [NOMBRE]
+            </h1>
 
             <p id="instruccion">
                 [Nombre], toca el corazón.
             </p>
 
-            <button id="corazon" aria-label="Tocar corazón">
+            <button
+                id="corazon"
+                aria-label="Tocar corazón"
+            >
                 ❤️
             </button>
 
-            <div id="mensaje" class="mensaje"></div>
+            <div
+                id="mensaje"
+                class="mensaje"
+            ></div>
 
-            <div id="progreso-container" class="oculto">
+
+            <div
+                id="progreso-container"
+                class="oculto"
+            >
 
                 <div class="barra">
-                    <div id="barra-progreso"></div>
+
+                    <div
+                        id="barra-progreso"
+                    ></div>
+
                 </div>
 
-                <span id="porcentaje">0%</span>
+                <span id="porcentaje">
+                    0%
+                </span>
 
             </div>
 
@@ -46,78 +76,133 @@
     </section>
 
 
+
     <!-- =====================================================
          CORAZÓN GIGANTE - TRANSICIÓN
     ====================================================== -->
 
-    <div id="corazon-final" class="corazon-final oculto">
+    <div
+        id="corazon-final"
+        class="corazon-final oculto"
+    >
         ❤️
     </div>
+
 
 
     <!-- =====================================================
          ESCENA 2 - CUMPLEAÑOS
     ====================================================== -->
 
-    <section id="escena2" class="escena">
+    <section
+        id="escena2"
+        class="escena"
+    >
 
         <div class="contenido-escena2">
 
+
             <h2>
+
                 Hoy es el cumpleaños<br>
+
                 de mi persona favorita.
+
             </h2>
 
+
             <p class="fecha">
+
                 15 de noviembre
+
             </p>
 
 
-            <!-- GALERÍA -->
+
+            <!-- =================================================
+                 GALERÍA
+            ================================================== -->
 
             <div class="galeria">
 
+
                 <div class="foto">
+
                     <div class="foto-placeholder">
+
                         📷<br>
+
                         Foto 1
+
                     </div>
+
                 </div>
 
+
+
                 <div class="foto">
+
                     <div class="foto-placeholder">
+
                         📷<br>
+
                         Foto 2
+
                     </div>
+
                 </div>
 
+
+
                 <div class="foto">
+
                     <div class="foto-placeholder">
+
                         📷<br>
+
                         Foto 3
+
                     </div>
+
                 </div>
+
 
             </div>
 
 
-            <!-- CARTA -->
+
+            <!-- =================================================
+                 CARTA
+            ================================================== -->
 
             <div class="seccion-carta">
 
+
                 <p class="texto-carta-intro">
+
                     Hay algo dentro para ti...
+
                 </p>
 
+
                 <button id="boton-carta">
+
                     💌 Descúbrelo
+
                 </button>
 
-                <div id="carta" class="carta">
+
+
+                <div
+                    id="carta"
+                    class="carta"
+                >
 
                     <div class="papel">
 
+
                         <p id="mensaje-carta">
+
                             Hay personas que llegan y lo cambian todo.<br><br>
 
                             Personas que hacen que los días sean más bonitos
@@ -144,71 +229,113 @@
                             Y que nunca dudes de lo especial que eres.<br><br>
 
                             Feliz cumpleaños, hijo mío.
+
                         </p>
+
 
                     </div>
 
                 </div>
 
+
             </div>
+
 
         </div>
 
     </section>
 
 
+
     <!-- =====================================================
-         CIERRE - CONTINÚA DEBAJO DE LA CARTA
+         CIERRE
+         
+         IMPORTANTE:
+         ESTA PARTE ESTÁ OCULTA AL INICIO.
+         SOLO APARECE DESPUÉS DE PRESIONAR
+         "DESCÚBRELO".
     ====================================================== -->
 
-    <section id="cierre" class="cierre">
+    <section
+        id="cierre"
+        class="cierre oculto"
+    >
 
         <div class="contenido-cierre">
 
-            <!-- ANIMACIÓN DE ABRAZO -->
 
-            <div id="abrazo" class="abrazo">
+            <!-- =================================================
+                 ABRAZO
+            ================================================== -->
+
+            <div
+                id="abrazo"
+                class="abrazo"
+            >
 
                 <div class="persona persona-izquierda">
+
                     🧑
+
                 </div>
+
 
                 <div class="corazon-abrazo">
+
                     ❤️
+
                 </div>
 
+
                 <div class="persona persona-derecha">
+
                     🧑
+
                 </div>
 
             </div>
 
 
-            <!-- TÍTULO FINAL -->
+
+            <!-- =================================================
+                 TÍTULO FINAL
+            ================================================== -->
 
             <h2 class="titulo-final">
+
                 Por muchos cumpleaños
                 más juntos
+
             </h2>
 
 
-            <!-- IMAGEN FINAL -->
+
+            <!-- =================================================
+                 IMAGEN FINAL
+            ================================================== -->
 
             <div class="imagen-final">
 
                 <div class="imagen-placeholder">
+
                     📷<br>
+
                     Imagen final
+
                 </div>
 
             </div>
+
 
         </div>
 
     </section>
 
 
+
     <script src="script.js"></script>
 
+
 </body>
+
 </html>
