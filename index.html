@@ -3,14 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feliz cumpleaños 🎂</title>
+
+    <title>Para ti ❤️</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <h1>🎂 ¡Feliz cumpleaños! 🎉</h1>
+    <!-- =========================
+         ESCENA 1 - EL CORAZÓN
+    ========================== -->
 
-    <p>Esta es la primera versión de nuestro pequeño regalo ❤️</p>
+    <section id="escena1" class="escena activa">
+
+        <div class="contenido-inicial">
+
+            <h1>[NOMBRE]</h1>
+
+            <p id="instruccion">
+                [Nombre], toca el corazón.
+            </p>
+
+            <button id="corazon" aria-label="Tocar corazón">
+                ❤️
+            </button>
+
+            <div id="mensaje" class="mensaje"></div>
+
+            <div id="progreso-container" class="oculto">
+
+                <div class="barra">
+                    <div id="barra-progreso"></div>
+                </div>
+
+                <span id="porcentaje">0%</span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         TRANSICIÓN DEL CORAZÓN
+    ========================== -->
+
+    <div id="corazon-final" class="corazon-final oculto">
+        ❤️
+    </div>
+
+
+    <!-- =========================
+         ESCENA 2
+    ========================== -->
+
+    <section id="escena2" class="escena">
+
+        <div class="contenido-escena2">
+
+            <h2>
+                Hoy es el cumpleaños<br>
+                de mi persona favorita.
+            </h2>
+
+            <p class="fecha">15 de noviembre</p>
+
+
+            <!-- GALERÍA -->
+
+            <div class="galeria">
+
+                <div class="foto">
+                    <div class="foto-placeholder">
+                        📷<br>
+                        Foto 1
+                    </div>
+                </div>
+
+                <div class="foto">
+                    <div class="foto-placeholder">
+                        📷<br>
+                        Foto 2
+                    </div>
+                </div>
+
+                <div class="foto">
+                    <div class="foto-placeholder">
+                        📷<br>
+                        Foto 3
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- CARTA -->
+
+            <div class="seccion-carta">
+
+                <p class="texto-carta-intro">
+                    Hay algo dentro para ti...
+                </p>
+
+                <button id="boton-carta">
+                    💌 Descúbrelo
+                </button>
+
+                <div id="carta" class="carta">
+
+                    <div class="papel">
+
+                        <p id="mensaje-carta">
+                            [Mensaje carta]
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <script src="script.js"></script>
 
 </body>
 </html>
