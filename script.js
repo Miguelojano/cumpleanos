@@ -3,64 +3,37 @@
 ===================================================== */
 
 const mensajes = [
-
     "[Mensaje 1]",
-
     "[Mensaje 2]",
-
     "[Mensaje 3]",
-
     "[Mensaje 4]",
-
     "[Mensaje 5]",
-
     "[Mensaje 6]",
-
     "[Mensaje 7]"
-
 ];
-
 
 /* =====================================================
    ELEMENTOS
 ===================================================== */
 
-const corazon =
-    document.getElementById("corazon");
+const corazon = document.getElementById("corazon");
+const mensaje = document.getElementById("mensaje");
+const instruccion = document.getElementById("instruccion");
 
-const mensaje =
-    document.getElementById("mensaje");
+const progresoContainer = document.getElementById("progreso-container");
+const barra = document.getElementById("barra-progreso");
+const porcentaje = document.getElementById("porcentaje");
 
-const instruccion =
-    document.getElementById("instruccion");
+const escena1 = document.getElementById("escena1");
+const escena2 = document.getElementById("escena2");
 
-const progresoContainer =
-    document.getElementById("progreso-container");
+const corazonFinal = document.getElementById("corazon-final");
 
-const barraProgreso =
-    document.getElementById("barra-progreso");
+const botonCarta = document.getElementById("boton-carta");
+const carta = document.getElementById("carta");
 
-const porcentaje =
-    document.getElementById("porcentaje");
-
-const escena1 =
-    document.getElementById("escena1");
-
-const escena2 =
-    document.getElementById("escena2");
-
-const corazonFinal =
-    document.getElementById("corazon-final");
-
-const abrazo =
-    document.getElementById("abrazo");
-
-const botonCarta =
-    document.getElementById("boton-carta");
-
-const carta =
-    document.getElementById("carta");
-
+const abrazo = document.getElementById("abrazo");
+const tituloFinal = document.querySelector(".titulo-final");
 
 /* =====================================================
    ESTADO
@@ -68,319 +41,132 @@ const carta =
 
 let contador = 0;
 
-
-/* =====================================================
-   PORCENTAJES
-===================================================== */
-
-const porcentajes = [
-
-    15,
-    28,
-    41,
-    55,
-    70,
-    85,
-    100
-
-];
-
-
-/* =====================================================
-   ANIMACIONES
-===================================================== */
+const porcentajes = [15,28,41,55,70,85,100];
 
 const animaciones = [
-
     "latido",
-
     "corazon-fuerte",
-
     "latido",
-
     "corazon-brillo",
-
-    "latido-fuerte",
-
+    "corazon-fuerte",
     "corazon-brillo",
-
     "corazon-fuerte"
-
 ];
 
-
 /* =====================================================
-   TOQUE DEL CORAZÓN
+   CORAZÓN
 ===================================================== */
 
-corazon.addEventListener("click", () => {
+corazon.addEventListener("click",()=>{
 
+    if(contador<mensajes.length){
 
-    /*
-        Los primeros 7 clics muestran
-        los mensajes y llenan la barra.
-    */
+        mensaje.textContent=mensajes[contador];
+        mensaje.classList.remove("visible");
 
-    if (contador < mensajes.length) {
-
-
-        /* =========================
-           MENSAJE
-        ========================= */
-
-        mensaje.textContent =
-            mensajes[contador];
-
-        mensaje.classList.remove(
-            "visible"
-        );
-
-        setTimeout(() => {
-
-            mensaje.classList.add(
-                "visible"
-            );
-
-        }, 50);
-
-
-        /* =========================
-           ANIMACIÓN
-        ========================= */
+        setTimeout(()=>{
+            mensaje.classList.add("visible");
+        },50);
 
         corazon.classList.remove(
-
             "latido",
-
             "corazon-fuerte",
-
             "corazon-brillo"
-
         );
 
         void corazon.offsetWidth;
 
-        corazon.classList.add(
+        corazon.classList.add(animaciones[contador]);
 
-            animaciones[contador]
+        progresoContainer.classList.remove("oculto");
 
-        );
-
-
-        /* =========================
-           PROGRESO
-        ========================= */
-
-        progresoContainer.classList.remove(
-            "oculto"
-        );
-
-        const progreso =
-            porcentajes[contador];
-
-        barraProgreso.style.width =
-            progreso + "%";
-
-        porcentaje.textContent =
-            progreso + "%";
-
+        barra.style.width=porcentajes[contador]+"%";
+        porcentaje.textContent=porcentajes[contador]+"%";
 
         contador++;
 
+        if(contador===mensajes.length){
 
-        /* =========================
-           ÚLTIMO MENSAJE
-        ========================= */
-
-        if (
-            contador ===
-            mensajes.length
-        ) {
-
-            setTimeout(() => {
-
-                instruccion.textContent =
-                    "Toca por última vez ❤️";
-
-            }, 600);
+            setTimeout(()=>{
+                instruccion.textContent="Toca por última vez ❤️";
+            },600);
 
         }
 
-
         return;
+
     }
 
-
-    /*
-        Después de los 7 mensajes,
-        el siguiente clic produce
-        la transición hacia el contenido
-        principal.
-    */
-
-    transicionarEscena();
+    transicion();
 
 });
 
-
 /* =====================================================
-   TRANSICIÓN ESCENA 1 → CUMPLEAÑOS
+   TRANSICIÓN
 ===================================================== */
 
-function transicionarEscena() {
+function transicion(){
 
-    /*
-        Evitamos que el corazón pueda
-        seguir recibiendo clics.
-    */
+    corazon.disabled=true;
 
-    corazon.disabled = true;
+    corazonFinal.classList.remove("oculto");
 
+    setTimeout(()=>{
 
-    /*
-        Mostramos el corazón gigante.
-    */
-
-    corazonFinal.classList.remove(
-        "oculto"
-    );
-
-
-    /*
-        Después de un momento,
-        hacemos visible la sección
-        de cumpleaños.
-
-        IMPORTANTE:
-        La escena 2 ahora sí se activa.
-    */
-
-    setTimeout(() => {
-
-        escena1.classList.remove(
-            "activa"
-        );
-
-        escena2.classList.add(
-            "activa"
-        );
-
-        /*
-            Nos aseguramos de comenzar
-            arriba de la sección de cumpleaños.
-        */
+        escena1.classList.remove("activa");
+        escena2.classList.add("activa");
 
         window.scrollTo({
-            top: 0,
-            behavior: "auto"
+            top:0,
+            behavior:"auto"
         });
 
-    }, 1000);
+    },1000);
 
-
-    /*
-        Dejamos que el corazón gigante
-        termine su animación antes
-        de desaparecer.
-    */
-
-    setTimeout(() => {
-
-        corazonFinal.classList.add(
-            "oculto"
-        );
-
-    }, 2300);
+    setTimeout(()=>{
+        corazonFinal.classList.add("oculto");
+    },2300);
 
 }
 
-
 /* =====================================================
-   ABRIR CARTA
+   CARTA
 ===================================================== */
 
-botonCarta.addEventListener(
-    "click",
-    () => {
+botonCarta.addEventListener("click",()=>{
 
-        /*
-            Abrimos la carta.
-        */
+    carta.classList.add("abierta");
 
-        carta.classList.add(
-            "abierta"
-        );
+    botonCarta.textContent="💗 Carta abierta";
+    botonCarta.disabled=true;
 
+    /* aparece el título final */
 
-        /*
-            Cambiamos el texto del botón.
-        */
+    setTimeout(()=>{
+        tituloFinal.classList.add("visible");
+    },700);
 
-        botonCarta.textContent =
-            "💗 Carta abierta";
-
-
-        /*
-            Evitamos abrirla nuevamente.
-        */
-
-        botonCarta.disabled = true;
-
-    }
-);
-
+});
 
 /* =====================================================
-   APARICIÓN DEL ABRAZO AL HACER SCROLL
+   ABRAZO
 ===================================================== */
 
-if ("IntersectionObserver" in window) {
+const observer=new IntersectionObserver((entries)=>{
 
-    const observerAbrazo =
-        new IntersectionObserver(
-            (entradas) => {
+    entries.forEach(entry=>{
 
-                entradas.forEach((entrada) => {
+        if(entry.isIntersecting){
 
-                    if (entrada.isIntersecting) {
+            abrazo.classList.add("visible");
+            observer.unobserve(entry.target);
 
-                        abrazo.classList.add(
-                            "visible"
-                        );
+        }
 
-                        /*
-                            Dejamos de observarlo
-                            después de aparecer.
-                        */
+    });
 
-                        observerAbrazo.unobserve(
-                            entrada.target
-                        );
+},{
+    threshold:.35
+});
 
-                    }
-
-                });
-
-            },
-            {
-                threshold: 0.35
-            }
-        );
-
-
-    observerAbrazo.observe(
-        abrazo
-    );
-
-} else {
-
-    /*
-        Compatibilidad para navegadores
-        que no soporten IntersectionObserver.
-    */
-
-    abrazo.classList.add(
-        "visible"
-    );
-
-}
+observer.observe(abrazo);
