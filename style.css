@@ -92,7 +92,23 @@ body {
     transition:
         transform 0.25s ease,
         filter 0.25s ease;
+
+    /* Evita el resaltado azul en móviles */
+    -webkit-tap-highlight-color: transparent;
+
+    /* Evita el contorno de foco */
+    outline: none;
+
+    /* Evita comportamientos táctiles no deseados */
+    touch-action: manipulation;
 }
+
+#corazon:focus,
+#corazon:focus-visible {
+    outline: none;
+    background: transparent;
+}
+
 
 #corazon:hover {
     transform: scale(1.08);
