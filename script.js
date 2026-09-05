@@ -1,416 +1,420 @@
-/* =====================================================
-   ELEMENTOS DEL DOM
-===================================================== */
+document.addEventListener("DOMContentLoaded", () => {
 
-const escena1 = document.getElementById("escena1");
-const escena2 = document.getElementById("escena2");
+    /* =====================================================
+       ELEMENTOS
+    ===================================================== */
 
-const corazon = document.getElementById("corazon");
-const corazonFinal = document.getElementById("corazon-final");
+    const escena1 = document.getElementById("escena1");
+    const escena2 = document.getElementById("escena2");
 
-const mensaje = document.getElementById("mensaje");
-const instruccion = document.getElementById("instruccion");
+    const corazon = document.getElementById("corazon");
+    const corazonFinal = document.getElementById("corazon-final");
 
-const progresoContainer = document.getElementById("progreso-container");
-const barraProgreso = document.getElementById("barra-progreso");
-const porcentaje = document.getElementById("porcentaje");
+    const mensaje = document.getElementById("mensaje");
+    const instruccion = document.getElementById("instruccion");
 
-const sobre = document.getElementById("sobre");
-const botonCarta = document.getElementById("boton-carta");
-const carta = document.getElementById("carta");
+    const progresoContainer =
+        document.getElementById("progreso-container");
 
-const cierre = document.getElementById("cierre");
-const abrazo = document.getElementById("abrazo");
+    const barraProgreso =
+        document.getElementById("barra-progreso");
 
+    const porcentaje =
+        document.getElementById("porcentaje");
 
-/* =====================================================
-   MENSAJES DEL CORAZÓN
-===================================================== */
+    const sobre =
+        document.getElementById("sobre");
 
-const mensajes = [
-    "[Mensaje 1]",
-    "[Mensaje 2]",
-    "[Mensaje 3]",
-    "[Mensaje 4]",
-    "[Mensaje 5]",
-    "[Mensaje 6]",
-    "[Mensaje 7]"
-];
+    const botonCarta =
+        document.getElementById("boton-carta");
 
+    const carta =
+        document.getElementById("carta");
 
-/* =====================================================
-   VARIABLES DEL JUEGO
-===================================================== */
+    const cierre =
+        document.getElementById("cierre");
 
-let contador = 0;
-
-const porcentajes = [
-    15,
-    28,
-    41,
-    55,
-    70,
-    85,
-    100
-];
+    const abrazo =
+        document.getElementById("abrazo");
 
 
-/* =====================================================
-   ANIMACIONES DEL CORAZÓN
-===================================================== */
+    /* =====================================================
+       MENSAJES
+    ===================================================== */
 
-const animaciones = [
-    "latido-suave",
-    "latido",
-    "latido-fuerte",
-    "pulso",
-    "latido-rapido",
-    "corazon-grande",
-    "corazon-final"
-];
+    const mensajes = [
+        "[Mensaje 1]",
+        "[Mensaje 2]",
+        "[Mensaje 3]",
+        "[Mensaje 4]",
+        "[Mensaje 5]",
+        "[Mensaje 6]",
+        "[Mensaje 7]"
+    ];
 
 
-/* =====================================================
-   CLICK DEL CORAZÓN
-===================================================== */
+    /* =====================================================
+       VARIABLES
+    ===================================================== */
 
-if (corazon) {
+    let contador = 0;
 
-    corazon.addEventListener("click", () => {
+    const porcentajes = [
+        15,
+        28,
+        41,
+        55,
+        70,
+        85,
+        100
+    ];
 
-        /* ---------------------------------------------
-           PRIMEROS 7 CLICKS
-        --------------------------------------------- */
+    const animaciones = [
+        "latido",
+        "corazon-fuerte",
+        "latido",
+        "corazon-brillo",
+        "corazon-fuerte",
+        "corazon-brillo",
+        "corazon-fuerte"
+    ];
 
-        if (contador < 7) {
 
-            // Mostrar mensaje correspondiente
-            mensaje.textContent = mensajes[contador];
+    /* =====================================================
+       CLICK EN EL CORAZÓN
+    ===================================================== */
 
-            // Mostrar barra de progreso
-            progresoContainer.classList.remove("oculto");
+    if (corazon) {
 
-            // Actualizar progreso
-            barraProgreso.style.width = porcentajes[contador] + "%";
-            porcentaje.textContent = porcentajes[contador] + "%";
+        corazon.addEventListener("click", () => {
 
-            // Reiniciar animaciones
-            corazon.classList.remove(
-                "latido-suave",
-                "latido",
-                "latido-fuerte",
-                "pulso",
-                "latido-rapido",
-                "corazon-grande",
-                "corazon-final"
-            );
+            /* ---------------------------------------------
+               PRIMEROS 7 CLICS
+            --------------------------------------------- */
 
-            // Forzar reinicio de animación
-            void corazon.offsetWidth;
+            if (contador < 7) {
 
-            // Aplicar animación correspondiente
-            corazon.classList.add(animaciones[contador]);
+                mensaje.textContent = mensajes[contador];
 
-            // Incrementar contador
-            contador++;
+                /* Mostrar progreso */
+                if (progresoContainer) {
+                    progresoContainer.classList.remove("oculto");
+                }
 
-            // Después del séptimo click
-            if (contador === 7) {
+                /* Actualizar barra */
+                if (barraProgreso) {
+                    barraProgreso.style.width =
+                        porcentajes[contador] + "%";
+                }
 
-                instruccion.textContent =
-                    "Toca por última vez ❤️";
+                /* Actualizar porcentaje */
+                if (porcentaje) {
+                    porcentaje.textContent =
+                        porcentajes[contador] + "%";
+                }
+
+                /* Animación del corazón */
+                corazon.classList.remove(
+                    "latido",
+                    "corazon-fuerte",
+                    "corazon-brillo"
+                );
+
+                void corazon.offsetWidth;
+
+                corazon.classList.add(
+                    animaciones[contador]
+                );
+
+                contador++;
+
+                /* -----------------------------------------
+                   DESPUÉS DEL SÉPTIMO CLIC
+                ----------------------------------------- */
+
+                if (contador === 7) {
+
+                    instruccion.textContent =
+                        "Toca por última vez ❤️";
+
+                }
 
             }
 
-            return;
-        }
+            /* ---------------------------------------------
+               OCTAVO CLIC → TRANSICIÓN
+            --------------------------------------------- */
 
+            else {
 
-        /* ---------------------------------------------
-           OCTAVO CLICK
-           TRANSICIÓN FINAL
-        --------------------------------------------- */
+                transicionarEscena();
 
-        if (contador === 7) {
+            }
 
-            transicionarEscena();
-
-        }
-
-    });
-
-}
-
-
-/* =====================================================
-   TRANSICIÓN ENTRE ESCENAS
-===================================================== */
-
-function transicionarEscena() {
-
-    // Evitar más clicks
-    corazon.disabled = true;
-
-    // Mostrar corazón gigante
-    corazonFinal.classList.remove("oculto");
-
-    // Pequeña pausa antes de comenzar
-    setTimeout(() => {
-
-        corazonFinal.classList.add("expandir");
-
-    }, 50);
-
-
-    // Cambiar a escena 2
-    setTimeout(() => {
-
-        escena1.classList.remove("activa");
-        escena1.classList.add("oculto");
-
-        escena2.classList.remove("oculto");
-        escena2.classList.add("activa");
-
-        // Volver arriba
-        window.scrollTo({
-            top: 0,
-            behavior: "instant"
         });
 
-    }, 1000);
+    }
 
 
-    // Ocultar corazón gigante
-    setTimeout(() => {
+    /* =====================================================
+       TRANSICIÓN DE ESCENA
+    ===================================================== */
 
-        corazonFinal.classList.add("oculto");
+    function transicionarEscena() {
 
-    }, 2300);
+        if (corazon) {
+            corazon.disabled = true;
+        }
 
-}
+        if (instruccion) {
+            instruccion.textContent = "";
+        }
 
+        /* Mostrar corazón gigante */
+        if (corazonFinal) {
+            corazonFinal.classList.remove("oculto");
 
-/* =====================================================
-   BOTÓN / SOBRE DE LA CARTA
-===================================================== */
+            void corazonFinal.offsetWidth;
 
-if (botonCarta) {
-
-    botonCarta.addEventListener("click", () => {
-
-        // Evitar múltiples clicks
-        botonCarta.disabled = true;
-
-        // Animación del sobre
-        sobre.classList.add("abriendo");
+            corazonFinal.classList.add("crecer");
+        }
 
 
         /* ---------------------------------------------
-           ABRIR CARTA
+           Cambiar de escena
         --------------------------------------------- */
 
         setTimeout(() => {
 
-            carta.classList.add("abierta");
-
-        }, 650);
-
-
-        /* ---------------------------------------------
-           MOSTRAR CIERRE
-        --------------------------------------------- */
-
-        setTimeout(() => {
-
-            if (cierre) {
-                cierre.classList.remove("oculto");
+            if (escena1) {
+                escena1.classList.remove("activa");
             }
 
-        }, 900);
+            if (escena2) {
+                escena2.classList.add("activa");
+            }
 
-
-        /* ---------------------------------------------
-           CAMBIAR SELLO
-        --------------------------------------------- */
-
-        setTimeout(() => {
-
-            botonCarta.innerHTML = "<span>♡</span>";
-
-        }, 500);
-
-
-        /* ---------------------------------------------
-           ACTIVAR OBSERVER DEL ABRAZO
-        --------------------------------------------- */
-
-        setTimeout(() => {
-
-            activarObserverAbrazo();
+            window.scrollTo({
+                top: 0,
+                behavior: "instant"
+            });
 
         }, 1000);
 
-    });
 
-}
+        /* ---------------------------------------------
+           Ocultar corazón gigante
+        --------------------------------------------- */
 
+        setTimeout(() => {
 
-/* =====================================================
-   OBSERVER DEL ABRAZO
-===================================================== */
+            if (corazonFinal) {
+                corazonFinal.classList.add("oculto");
+            }
 
-function activarObserverAbrazo() {
+        }, 2300);
 
-    if (!abrazo) {
-        return;
     }
 
-    const observer = new IntersectionObserver(
-        (entries) => {
 
-            entries.forEach((entry) => {
+    /* =====================================================
+       ABRIR CARTA
+    ===================================================== */
 
-                if (entry.isIntersecting) {
+    if (botonCarta) {
 
-                    abrazo.classList.add("visible");
+        botonCarta.addEventListener("click", () => {
+
+            botonCarta.disabled = true;
+
+            /* Animación del sobre */
+            if (sobre) {
+                sobre.classList.add("abriendo");
+            }
+
+
+            /* ---------------------------------------------
+               Abrir carta
+            --------------------------------------------- */
+
+            setTimeout(() => {
+
+                if (carta) {
+                    carta.classList.add("abierta");
+                }
+
+            }, 650);
+
+
+            /* ---------------------------------------------
+               Mostrar cierre
+            --------------------------------------------- */
+
+            setTimeout(() => {
+
+                if (cierre) {
+                    cierre.classList.remove("oculto");
+                }
+
+            }, 900);
+
+
+            /* ---------------------------------------------
+               Cambiar texto del botón
+            --------------------------------------------- */
+
+            setTimeout(() => {
+
+                botonCarta.innerHTML =
+                    "<span>♡</span>";
+
+            }, 500);
+
+
+            /* ---------------------------------------------
+               Observador del abrazo
+            --------------------------------------------- */
+
+            setTimeout(() => {
+
+                if (!abrazo) return;
+
+                const observer =
+                    new IntersectionObserver(
+                        (entries) => {
+
+                            entries.forEach((entry) => {
+
+                                if (entry.isIntersecting) {
+
+                                    abrazo.classList.add(
+                                        "visible"
+                                    );
+
+                                    observer.unobserve(
+                                        abrazo
+                                    );
+
+                                }
+
+                            });
+
+                        },
+                        {
+                            threshold: 0.25
+                        }
+                    );
+
+                observer.observe(abrazo);
+
+            }, 1000);
+
+        });
+
+    }
+
+
+    /* =====================================================
+       INDICADORES DE LA GALERÍA
+       
+       Sincroniza los tres puntos inferiores
+       con la fotografía que está visible.
+    ===================================================== */
+
+    const galeria =
+        document.querySelector(".galeria");
+
+    const fotosGaleria =
+        document.querySelectorAll(".galeria .foto");
+
+    const indicadoresGaleria =
+        document.querySelectorAll(
+            ".indicadores-fotos .indicador"
+        );
+
+
+    if (
+        galeria &&
+        fotosGaleria.length &&
+        indicadoresGaleria.length
+    ) {
+
+        function actualizarIndicadoresGaleria() {
+
+            const centroGaleria =
+                galeria.scrollLeft +
+                (galeria.clientWidth / 2);
+
+
+            let indiceActivo = 0;
+
+            let menorDistancia = Infinity;
+
+
+            fotosGaleria.forEach((foto, indice) => {
+
+                const centroFoto =
+                    foto.offsetLeft +
+                    (foto.offsetWidth / 2);
+
+
+                const distancia =
+                    Math.abs(
+                        centroFoto -
+                        centroGaleria
+                    );
+
+
+                if (distancia < menorDistancia) {
+
+                    menorDistancia =
+                        distancia;
+
+                    indiceActivo =
+                        indice;
 
                 }
 
             });
 
-        },
-        {
-            threshold: 0.2
+
+            indicadoresGaleria.forEach(
+                (indicador, indice) => {
+
+                    indicador.classList.toggle(
+                        "activo",
+                        indice === indiceActivo
+                    );
+
+                }
+            );
+
         }
-    );
-
-    observer.observe(abrazo);
-
-}
 
 
-/* =====================================================
-   INDICADORES DE LA GALERÍA
-===================================================== */
-
-const galeria = document.querySelector(".galeria");
-
-const fotosGaleria = document.querySelectorAll(
-    ".galeria .foto"
-);
-
-const indicadoresGaleria = document.querySelectorAll(
-    ".indicadores-fotos .indicador"
-);
-
-
-if (
-    galeria &&
-    fotosGaleria.length &&
-    indicadoresGaleria.length
-) {
-
-
-    /* ---------------------------------------------
-       DETERMINAR FOTO ACTIVA
-    --------------------------------------------- */
-
-    function actualizarIndicadorGaleria() {
-
-        /*
-         * Calculamos el centro visible de la galería
-         * y buscamos qué foto está más cerca de ese centro.
-         *
-         * Esto funciona tanto en computador como
-         * en celular, aunque cambie el ancho de las fotos.
-         */
-
-        const centroGaleria =
-            galeria.scrollLeft +
-            (galeria.clientWidth / 2);
-
-
-        let indiceActivo = 0;
-
-        let menorDistancia = Infinity;
-
-
-        fotosGaleria.forEach((foto, indice) => {
-
-            const centroFoto =
-                foto.offsetLeft +
-                (foto.offsetWidth / 2);
-
-
-            const distancia =
-                Math.abs(
-                    centroFoto - centroGaleria
-                );
-
-
-            if (distancia < menorDistancia) {
-
-                menorDistancia = distancia;
-                indiceActivo = indice;
-
+        /* Actualizar al deslizar */
+        galeria.addEventListener(
+            "scroll",
+            actualizarIndicadoresGaleria,
+            {
+                passive: true
             }
+        );
 
-        });
+
+        /* Actualizar al cambiar tamaño */
+        window.addEventListener(
+            "resize",
+            actualizarIndicadoresGaleria
+        );
 
 
-        /* ---------------------------------------------
-           ACTUALIZAR LOS PUNTOS
-        --------------------------------------------- */
-
-        indicadoresGaleria.forEach(
-            (indicador, indice) => {
-
-                indicador.classList.toggle(
-                    "activo",
-                    indice === indiceActivo
-                );
-
-            }
+        /* Estado inicial */
+        setTimeout(
+            actualizarIndicadoresGaleria,
+            100
         );
 
     }
 
-
-    /* ---------------------------------------------
-       ACTUALIZAR AL DESLIZAR
-    --------------------------------------------- */
-
-    galeria.addEventListener(
-        "scroll",
-        actualizarIndicadorGaleria,
-        {
-            passive: true
-        }
-    );
-
-
-    /* ---------------------------------------------
-       ACTUALIZAR AL CAMBIAR TAMAÑO
-    --------------------------------------------- */
-
-    window.addEventListener(
-        "resize",
-        actualizarIndicadorGaleria
-    );
-
-
-    /* ---------------------------------------------
-       ESTADO INICIAL
-    --------------------------------------------- */
-
-    setTimeout(
-        actualizarIndicadorGaleria,
-        100
-    );
-
-}
-
-
-/* =====================================================
-   FIN DEL SCRIPT
-===================================================== */
+});
