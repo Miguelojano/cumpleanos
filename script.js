@@ -35,34 +35,59 @@ const instruccion =
     document.getElementById("instruccion");
 
 const progresoContainer =
-    document.getElementById("progreso-container");
+    document.getElementById(
+        "progreso-container"
+    );
 
 const barraProgreso =
-    document.getElementById("barra-progreso");
+    document.getElementById(
+        "barra-progreso"
+    );
 
 const porcentaje =
-    document.getElementById("porcentaje");
+    document.getElementById(
+        "porcentaje"
+    );
 
 const escena1 =
-    document.getElementById("escena1");
+    document.getElementById(
+        "escena1"
+    );
 
 const escena2 =
-    document.getElementById("escena2");
+    document.getElementById(
+        "escena2"
+    );
 
 const corazonFinal =
-    document.getElementById("corazon-final");
+    document.getElementById(
+        "corazon-final"
+    );
+
+const sobre =
+    document.getElementById(
+        "sobre"
+    );
 
 const botonCarta =
-    document.getElementById("boton-carta");
+    document.getElementById(
+        "boton-carta"
+    );
 
 const carta =
-    document.getElementById("carta");
+    document.getElementById(
+        "carta"
+    );
 
 const cierre =
-    document.getElementById("cierre");
+    document.getElementById(
+        "cierre"
+    );
 
 const abrazo =
-    document.getElementById("abrazo");
+    document.getElementById(
+        "abrazo"
+    );
 
 
 /* =====================================================
@@ -121,9 +146,9 @@ corazon.addEventListener(
     () => {
 
 
-        /*
-            PRIMEROS 7 CLICS
-        */
+        /* =========================================
+           PRIMEROS 7 CLICS
+        ========================================== */
 
         if (
             contador <
@@ -131,12 +156,11 @@ corazon.addEventListener(
         ) {
 
 
-            /* =========================
-               MENSAJE
-            ========================= */
+            /* Mensaje */
 
             mensaje.textContent =
                 mensajes[contador];
+
 
             mensaje.classList.remove(
                 "visible"
@@ -153,9 +177,7 @@ corazon.addEventListener(
 
 
 
-            /* =========================
-               ANIMACIÓN
-            ========================= */
+            /* Animación */
 
             corazon.classList.remove(
 
@@ -179,9 +201,7 @@ corazon.addEventListener(
 
 
 
-            /* =========================
-               PROGRESO
-            ========================= */
+            /* Progreso */
 
             progresoContainer.classList.remove(
                 "oculto"
@@ -204,9 +224,7 @@ corazon.addEventListener(
 
 
 
-            /* =========================
-               DESPUÉS DEL 7.º CLIC
-            ========================= */
+            /* Último mensaje */
 
             if (
                 contador ===
@@ -228,11 +246,9 @@ corazon.addEventListener(
         }
 
 
-
-        /* =================================================
-           8.º CLIC
-           TRANSICIÓN
-        ================================================== */
+        /* =========================================
+           OCTAVO CLIC
+        ========================================== */
 
         transicionarEscena();
 
@@ -241,22 +257,16 @@ corazon.addEventListener(
 
 
 /* =====================================================
-   TRANSICIÓN CORAZÓN → CUMPLEAÑOS
+   TRANSICIÓN
 ===================================================== */
 
 function transicionarEscena() {
 
 
-    /*
-        Desactivamos el corazón.
-    */
-
     corazon.disabled = true;
 
 
-    /*
-        Mostramos el corazón gigante.
-    */
+    /* Mostrar corazón gigante */
 
     corazonFinal.classList.remove(
         "oculto"
@@ -264,14 +274,10 @@ function transicionarEscena() {
 
 
     /*
-        Después de 1 segundo:
+        Después de 1 segundo aparece
+        la sección de cumpleaños.
 
-        - desaparece escena 1
-        - aparece cumpleaños
-        - galería
-        - carta
-
-        EL CIERRE SIGUE OCULTO.
+        El cierre permanece oculto.
     */
 
     setTimeout(() => {
@@ -299,7 +305,6 @@ function transicionarEscena() {
     }, 1000);
 
 
-
     /*
         Dejamos terminar la animación
         del corazón gigante.
@@ -317,7 +322,7 @@ function transicionarEscena() {
 
 
 /* =====================================================
-   BOTÓN "DESCÚBRELO"
+   DESCÚBRELO
 ===================================================== */
 
 botonCarta.addEventListener(
@@ -326,63 +331,149 @@ botonCarta.addEventListener(
 
 
         /*
-            Abrimos la carta.
-        */
-
-        carta.classList.add(
-            "abierta"
-        );
-
-
-        /*
-            Cambiamos el botón.
-        */
-
-        botonCarta.textContent =
-            "💗 Carta abierta";
-
-
-        /*
-            Evitamos volver a presionarlo.
+            Evitamos doble activación.
         */
 
         botonCarta.disabled = true;
 
 
-
         /*
-            =============================================
-            AHORA SÍ APARECE EL CIERRE
-            =============================================
-
-            Hasta este momento:
-
-                cierre = display:none
-
-            Por eso no se podía hacer scroll
-            hasta el abrazo ni al título final.
-
-            Al presionar "Descúbrelo",
-            quitamos "oculto".
+            Animación del sobre.
         */
 
-        cierre.classList.remove(
-            "oculto"
+        sobre.classList.add(
+            "abriendo"
         );
 
 
         /*
-            Pequeña espera para que el cierre
-            pueda aparecer de forma natural.
+            Después de un pequeño momento
+            mostramos la carta.
         */
 
         setTimeout(() => {
 
-            abrazo.classList.add(
-                "visible"
+
+            carta.classList.add(
+                "abierta"
             );
 
-        }, 300);
+
+        }, 650);
+
+
+        /*
+            El cierre aparece después
+            de abrir "Descúbrelo".
+        */
+
+        setTimeout(() => {
+
+
+            cierre.classList.remove(
+                "oculto"
+            );
+
+
+        }, 900);
+
+
+        /*
+            El botón cambia de estado.
+        */
+
+        setTimeout(() => {
+
+            botonCarta.innerHTML =
+                "<span>♡</span>";
+
+        }, 500);
+
+
+        /*
+            El abrazo aparece cuando
+            la zona entra en pantalla.
+        */
+
+        setTimeout(() => {
+
+
+            iniciarObserverAbrazo();
+
+
+        }, 1000);
 
     }
 );
+
+
+/* =====================================================
+   OBSERVADOR DEL ABRAZO
+===================================================== */
+
+function iniciarObserverAbrazo() {
+
+
+    if (
+        "IntersectionObserver"
+        in window
+    ) {
+
+
+        const observer =
+            new IntersectionObserver(
+                (entries) => {
+
+
+                    entries.forEach(
+                        (entry) => {
+
+
+                            if (
+                                entry.isIntersecting
+                            ) {
+
+
+                                abrazo.classList.add(
+                                    "visible"
+                                );
+
+
+                                observer.unobserve(
+                                    entry.target
+                                );
+
+                            }
+
+                        }
+                    );
+
+                },
+                {
+
+                    threshold: .35
+
+                }
+            );
+
+
+        observer.observe(
+            abrazo
+        );
+
+
+    } else {
+
+
+        /*
+            Compatibilidad con navegadores
+            que no soporten IntersectionObserver.
+        */
+
+        abrazo.classList.add(
+            "visible"
+        );
+
+    }
+
+}
