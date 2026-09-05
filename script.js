@@ -224,12 +224,18 @@ corazon.addEventListener("click", () => {
 
 
 /* =====================================================
-   TRANSICIÓN ESCENA 1 → CONTENIDO PRINCIPAL
+   TRANSICIÓN ESCENA 1 → CUMPLEAÑOS
 ===================================================== */
 
 function transicionarEscena() {
 
+    /*
+        Evitamos que el corazón pueda
+        seguir recibiendo clics.
+    */
+
     corazon.disabled = true;
+
 
     /*
         Mostramos el corazón gigante.
@@ -239,13 +245,14 @@ function transicionarEscena() {
         "oculto"
     );
 
-    /*
-        La escena 1 desaparece mientras
-        el corazón cubre la pantalla.
 
-        El contenido principal permanece
-        en el mismo documento y continúa
-        mediante scroll.
+    /*
+        Después de un momento,
+        hacemos visible la sección
+        de cumpleaños.
+
+        IMPORTANTE:
+        La escena 2 ahora sí se activa.
     */
 
     setTimeout(() => {
@@ -254,9 +261,14 @@ function transicionarEscena() {
             "activa"
         );
 
-        corazonFinal.classList.add(
-            "oculto"
+        escena2.classList.add(
+            "activa"
         );
+
+        /*
+            Nos aseguramos de comenzar
+            arriba de la sección de cumpleaños.
+        */
 
         window.scrollTo({
             top: 0,
@@ -264,6 +276,21 @@ function transicionarEscena() {
         });
 
     }, 1000);
+
+
+    /*
+        Dejamos que el corazón gigante
+        termine su animación antes
+        de desaparecer.
+    */
+
+    setTimeout(() => {
+
+        corazonFinal.classList.add(
+            "oculto"
+        );
+
+    }, 2300);
 
 }
 
@@ -276,12 +303,26 @@ botonCarta.addEventListener(
     "click",
     () => {
 
+        /*
+            Abrimos la carta.
+        */
+
         carta.classList.add(
             "abierta"
         );
 
+
+        /*
+            Cambiamos el texto del botón.
+        */
+
         botonCarta.textContent =
             "💗 Carta abierta";
+
+
+        /*
+            Evitamos abrirla nuevamente.
+        */
 
         botonCarta.disabled = true;
 
@@ -307,6 +348,11 @@ if ("IntersectionObserver" in window) {
                             "visible"
                         );
 
+                        /*
+                            Dejamos de observarlo
+                            después de aparecer.
+                        */
+
                         observerAbrazo.unobserve(
                             entrada.target
                         );
@@ -321,15 +367,20 @@ if ("IntersectionObserver" in window) {
             }
         );
 
-    observerAbrazo.observe(abrazo);
+
+    observerAbrazo.observe(
+        abrazo
+    );
 
 } else {
 
     /*
-        Compatibilidad para navegadores que
-        no soporten IntersectionObserver.
+        Compatibilidad para navegadores
+        que no soporten IntersectionObserver.
     */
 
-    abrazo.classList.add("visible");
+    abrazo.classList.add(
+        "visible"
+    );
 
 }
