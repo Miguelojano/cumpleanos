@@ -49,11 +49,11 @@ const escena1 =
 const escena2 =
     document.getElementById("escena2");
 
-const escena3 =
-    document.getElementById("escena3");
-
 const corazonFinal =
     document.getElementById("corazon-final");
+
+const abrazo =
+    document.getElementById("abrazo");
 
 const botonCarta =
     document.getElementById("boton-carta");
@@ -117,8 +117,8 @@ corazon.addEventListener("click", () => {
 
 
     /*
-       Los primeros 7 clics muestran
-       los mensajes y llenan la barra.
+        Los primeros 7 clics muestran
+        los mensajes y llenan la barra.
     */
 
     if (contador < mensajes.length) {
@@ -203,6 +203,7 @@ corazon.addEventListener("click", () => {
                     "Toca por última vez ❤️";
 
             }, 600);
+
         }
 
 
@@ -211,9 +212,10 @@ corazon.addEventListener("click", () => {
 
 
     /*
-       Después de los 7 mensajes,
-       el siguiente clic produce
-       la transición.
+        Después de los 7 mensajes,
+        el siguiente clic produce
+        la transición hacia el contenido
+        principal.
     */
 
     transicionarEscena();
@@ -222,27 +224,28 @@ corazon.addEventListener("click", () => {
 
 
 /* =====================================================
-   TRANSICIÓN ESCENA 1 → ESCENA 2
+   TRANSICIÓN ESCENA 1 → CONTENIDO PRINCIPAL
 ===================================================== */
 
 function transicionarEscena() {
 
-
     corazon.disabled = true;
 
-
     /*
-       Mostramos el corazón gigante.
+        Mostramos el corazón gigante.
     */
 
     corazonFinal.classList.remove(
         "oculto"
     );
 
-
     /*
-       Cambiamos de escena mientras
-       el corazón cubre la pantalla.
+        La escena 1 desaparece mientras
+        el corazón cubre la pantalla.
+
+        El contenido principal permanece
+        en el mismo documento y continúa
+        mediante scroll.
     */
 
     setTimeout(() => {
@@ -251,25 +254,16 @@ function transicionarEscena() {
             "activa"
         );
 
-        escena2.classList.add(
-            "activa"
-        );
-
-    }, 1000);
-
-
-    /*
-       Después de la animación
-       eliminamos el corazón gigante.
-    */
-
-    setTimeout(() => {
-
         corazonFinal.classList.add(
             "oculto"
         );
 
-    }, 2300);
+        window.scrollTo({
+            top: 0,
+            behavior: "auto"
+        });
+
+    }, 1000);
 
 }
 
@@ -282,65 +276,60 @@ botonCarta.addEventListener(
     "click",
     () => {
 
-
         carta.classList.add(
             "abierta"
         );
 
-
         botonCarta.textContent =
             "💗 Carta abierta";
 
-
         botonCarta.disabled = true;
-
-
-        /*
-           Después de abrir la carta,
-           esperamos unos segundos y
-           pasamos a la escena 3.
-        */
-
-        setTimeout(() => {
-
-            pasarAEscena3();
-
-        }, 7000);
 
     }
 );
 
 
 /* =====================================================
-   ESCENA 2 → ESCENA 3
+   APARICIÓN DEL ABRAZO AL HACER SCROLL
 ===================================================== */
 
-function pasarAEscena3() {
+if ("IntersectionObserver" in window) {
 
+    const observerAbrazo =
+        new IntersectionObserver(
+            (entradas) => {
 
-    escena2.classList.remove(
-        "activa"
-    );
+                entradas.forEach((entrada) => {
 
+                    if (entrada.isIntersecting) {
 
-    escena3.classList.add(
-        "activa"
-    );
+                        abrazo.classList.add(
+                            "visible"
+                        );
 
+                        observerAbrazo.unobserve(
+                            entrada.target
+                        );
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.35
+            }
+        );
+
+    observerAbrazo.observe(abrazo);
+
+} else {
 
     /*
-       Volvemos al inicio de la escena
-       para que la animación del abrazo
-       comience desde arriba.
+        Compatibilidad para navegadores que
+        no soporten IntersectionObserver.
     */
 
-    window.scrollTo({
-
-        top: 0,
-
-        behavior: "smooth"
-
-    });
+    abrazo.classList.add("visible");
 
 }
-
