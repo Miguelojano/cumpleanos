@@ -1,693 +1,515 @@
 /* =====================================================
-   MENSAJES
-===================================================== */
-
-const mensajes = [
-
-    "[Mensaje 1]",
-
-    "[Mensaje 2]",
-
-    "[Mensaje 3]",
-
-    "[Mensaje 4]",
-
-    "[Mensaje 5]",
-
-    "[Mensaje 6]",
-
-    "[Mensaje 7]"
-
-];
-
-
-/* =====================================================
    ELEMENTOS
 ===================================================== */
 
-const corazon =
-    document.getElementById("corazon");
+const escena1 = document.getElementById("escena1");
+const escena2 = document.getElementById("escena2");
+const escena3 = document.getElementById("escena3");
 
-const mensaje =
-    document.getElementById("mensaje");
+const nombreInput = document.getElementById("nombre");
+const botonNombre = document.getElementById("boton-nombre");
 
-const instruccion =
-    document.getElementById("instruccion");
+const corazon = document.getElementById("corazon");
+const instruccion = document.getElementById("instruccion");
 
 const progresoContainer =
-    document.getElementById(
-        "progreso-container"
-    );
+    document.getElementById("progreso-container");
 
 const barraProgreso =
-    document.getElementById(
-        "barra-progreso"
-    );
+    document.getElementById("barra-progreso");
 
 const porcentaje =
-    document.getElementById(
-        "porcentaje"
-    );
-
-const escena1 =
-    document.getElementById(
-        "escena1"
-    );
-
-const escena2 =
-    document.getElementById(
-        "escena2"
-    );
-
-const corazonFinal =
-    document.getElementById(
-        "corazon-final"
-    );
+    document.getElementById("porcentaje");
 
 const sobre =
-    document.getElementById(
-        "sobre"
-    );
+    document.getElementById("sobre");
 
 const botonCarta =
-    document.getElementById(
-        "boton-carta"
-    );
+    document.getElementById("boton-carta");
 
 const carta =
-    document.getElementById(
-        "carta"
-    );
+    document.getElementById("carta");
 
 const cierre =
-    document.getElementById(
-        "cierre"
-    );
-
-const abrazo =
-    document.getElementById(
-        "abrazo"
-    );
+    document.getElementById("cierre");
 
 
 /* =====================================================
-   ESTADO
+   VARIABLES
 ===================================================== */
+
+let nombre = "";
 
 let contador = 0;
 
-
-/* =====================================================
-   PORCENTAJES
-===================================================== */
+const mensajes = [
+    "Toca el corazón una vez más ❤️",
+    "Hay algo muy especial esperando por ti ✨",
+    "Cada toque guarda un pequeño pedacito de amor 💕",
+    "Ya falta poquito... 🌷",
+    "Sigue tocando ❤️",
+    "Estamos llegando al final ✨",
+    "Este último mensaje es para ti 💕"
+];
 
 const porcentajes = [
-
     15,
-
     28,
-
     41,
-
     55,
-
     70,
-
     85,
-
     100
-
 ];
 
 
 /* =====================================================
-   ANIMACIONES
+   INICIO
 ===================================================== */
 
-const animaciones = [
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
-    "latido",
+        escena1.classList.add("activa");
 
-    "corazon-fuerte",
+        if (nombreInput) {
+            nombreInput.focus();
+        }
 
-    "latido",
-
-    "corazon-brillo",
-
-    "corazon-fuerte",
-
-    "corazon-brillo",
-
-    "corazon-fuerte"
-
-];
+    }
+);
 
 
 /* =====================================================
-   CORAZÓN PRINCIPAL
+   INGRESAR NOMBRE
+===================================================== */
+
+botonNombre.addEventListener(
+    "click",
+    () => {
+
+        const nombreIngresado =
+            nombreInput.value.trim();
+
+        if (
+            nombreIngresado === ""
+        ) {
+
+            nombreInput.focus();
+
+            return;
+        }
+
+        nombre =
+            nombreIngresado;
+
+        document.querySelectorAll(
+            ".nombre-personalizado"
+        ).forEach(
+            elemento => {
+                elemento.textContent =
+                    nombre;
+            }
+        );
+
+        escena1.classList.remove(
+            "activa"
+        );
+
+        escena2.classList.add(
+            "activa"
+        );
+
+        instruccion.textContent =
+            nombre +
+            ", toca el corazón.";
+
+    }
+);
+
+
+/* =====================================================
+   ENTER EN EL NOMBRE
+===================================================== */
+
+nombreInput.addEventListener(
+    "keydown",
+    (evento) => {
+
+        if (
+            evento.key === "Enter"
+        ) {
+
+            botonNombre.click();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   CORAZÓN
 ===================================================== */
 
 corazon.addEventListener(
     "click",
     () => {
 
+        if (
+            contador >= 8
+        ) {
+            return;
+        }
 
-        /* =============================================
+        contador++;
+
+        /* ---------------------------------------------
            PRIMEROS 7 CLICS
-        ============================================= */
+        --------------------------------------------- */
 
         if (
-            contador <
-            mensajes.length
+            contador <= 7
         ) {
 
-
-            /* =========================================
-               MOSTRAR MENSAJE
-
-               El mensaje reemplaza el texto inicial
-               "[Nombre], toca el corazón."
-            ========================================= */
-
-            instruccion.classList.remove(
-                "visible"
-            );
-
             instruccion.textContent =
-                mensajes[contador];
+                mensajes[
+                    contador - 1
+                ];
 
-            setTimeout(() => {
+            const progreso =
+                porcentajes[
+                    contador - 1
+                ];
 
-                instruccion.classList.add(
-                    "visible"
-                );
+            barraProgreso.style.width =
+                progreso + "%";
 
-            }, 50);
-
-
-            /* =========================================
-               ANIMAR CORAZÓN
-            ========================================= */
-
-            corazon.classList.remove(
-
-                "latido",
-
-                "corazon-fuerte",
-
-                "corazon-brillo"
-
-            );
-
-
-            void corazon.offsetWidth;
-
-
-            corazon.classList.add(
-                animaciones[contador]
-            );
-
-
-            /* =========================================
-               PROGRESO
-            ========================================= */
+            porcentaje.textContent =
+                progreso + "%";
 
             progresoContainer.classList.remove(
                 "oculto"
             );
 
+            /* Pequeña animación */
 
-            const progreso =
-                porcentajes[contador];
+            corazon.classList.remove(
+                "latido"
+            );
 
+            void corazon.offsetWidth;
 
-            barraProgreso.style.width =
-                progreso + "%";
-
-
-            porcentaje.textContent =
-                progreso + "%";
-
-
-            /* =========================================
-               AVANZAR CONTADOR
-            ========================================= */
-
-            contador++;
-
-
-            /* =========================================
-               DESPUÉS DEL 7.º CLIC
-            ========================================= */
-
-            if (
-                contador ===
-                mensajes.length
-            ) {
-
-                setTimeout(() => {
-
-                    instruccion.textContent =
-                        "Toca por última vez ❤️";
-
-                }, 600);
-
-            }
-
-
-            return;
+            corazon.classList.add(
+                "latido"
+            );
 
         }
 
 
-        /* =================================================
-           8.º CLIC
-        ================================================== */
+        /* ---------------------------------------------
+           OCTAVO CLIC
+        --------------------------------------------- */
 
-        transicionarEscena();
+        if (
+            contador === 8
+        ) {
+
+            instruccion.textContent =
+                "Toca por última vez ❤️";
+
+            corazon.disabled = true;
+
+            corazon.classList.add(
+                "corazon-final"
+            );
+
+            setTimeout(
+                () => {
+
+                    mostrarCorazonGigante();
+
+                },
+                500
+            );
+
+        }
 
     }
 );
 
 
 /* =====================================================
-   TRANSICIÓN CORAZÓN → CUMPLEAÑOS
+   CORAZÓN GIGANTE
 ===================================================== */
 
-function transicionarEscena() {
+function mostrarCorazonGigante() {
 
+    const gigante =
+        document.createElement(
+            "div"
+        );
 
-    /*
-        Desactivamos el botón.
-    */
+    gigante.className =
+        "corazon-transicion";
 
-    corazon.disabled = true;
+    gigante.textContent =
+        "♥";
 
-
-    /*
-        Mostramos el corazón gigante.
-    */
-
-    corazonFinal.classList.remove(
-        "oculto"
+    document.body.appendChild(
+        gigante
     );
 
+    setTimeout(
+        () => {
 
-    /*
-        Después de 1 segundo:
+            gigante.classList.add(
+                "creciendo"
+            );
 
-        - desaparece el inicio
-        - aparece cumpleaños
-        - aparece galería
-        - aparece sobre
+        },
+        50
+    );
 
-        El cierre permanece oculto.
-    */
+    setTimeout(
+        () => {
 
-    setTimeout(() => {
+            escena2.classList.remove(
+                "activa"
+            );
 
+            escena3.classList.add(
+                "activa"
+            );
 
-        escena1.classList.remove(
-            "activa"
-        );
+            gigante.remove();
 
+            window.scrollTo({
+                top: 0,
+                behavior: "instant"
+            });
 
-        escena2.classList.add(
-            "activa"
-        );
-
-
-        window.scrollTo({
-
-            top: 0,
-
-            behavior: "auto"
-
-        });
-
-
-    }, 1000);
-
-
-    /*
-        Dejamos terminar la animación
-        del corazón gigante.
-    */
-
-    setTimeout(() => {
-
-        corazonFinal.classList.add(
-            "oculto"
-        );
-
-    }, 2300);
+        },
+        1100
+    );
 
 }
 
 
 /* =====================================================
-   BOTÓN "DESCÚBRELO"
+   BOTÓN DE LA CARTA
 ===================================================== */
 
 botonCarta.addEventListener(
     "click",
     () => {
 
+        if (
+            botonCarta.disabled
+        ) {
+            return;
+        }
 
-        /*
-            Evitamos que se pulse
-            varias veces.
-        */
+        botonCarta.disabled =
+            true;
 
-        botonCarta.disabled = true;
+        sobre.classList.add(
+            "abriendo"
+        );
 
-         /*
-             Pequeño desplazamiento hacia abajo
-             al descubrir la carta.
-         */
-         
-         setTimeout(() => {
-         
-             window.scrollBy({
-                 top: 120,
-                 behavior: "smooth"
-             });
-         
-         }, 100);
-         
-         
-         /*
-             Abrimos visualmente el sobre.
-         */
-         
-         sobre.classList.add(
-             "abriendo"
-         );
+        setTimeout(
+            () => {
+
+                carta.classList.add(
+                    "abierta"
+                );
+
+            },
+            650
+        );
 
 
-        /*
-            Esperamos un poco antes
-            de mostrar la carta.
-        */
+        /* ---------------------------------------------
+           SCROLL DE ~3 CM
+        --------------------------------------------- */
 
-        setTimeout(() => {
+        setTimeout(
+            () => {
 
-            carta.classList.add(
-                "abierta"
-            );
+                window.scrollBy({
+                    top: 120,
+                    behavior: "smooth"
+                });
 
-        }, 650);
-
-
-        /*
-            AQUÍ SE DESBLOQUEA EL CIERRE.
-
-            Antes de este momento:
-
-                #cierre = display:none
-
-            Después de pulsar Descúbrelo:
-
-                #cierre = visible
-        */
-
-        setTimeout(() => {
-
-            cierre.classList.remove(
-                "oculto"
-            );
-
-        }, 900);
+            },
+            100
+        );
 
 
-        /*
-            Cambiamos el contenido del sello.
-        */
+        /* ---------------------------------------------
+           LLUVIA DE CUMPLEAÑOS
+           3 SEGUNDOS DESPUÉS
+        --------------------------------------------- */
 
-        setTimeout(() => {
+        setTimeout(
+            () => {
 
-            botonCarta.innerHTML =
-                "<span>♡</span>";
+                iniciarLluviaCumpleanos();
 
-        }, 500);
-
-
-        /*
-            Inicializamos el observador
-            del abrazo.
-        */
-
-        setTimeout(() => {
-
-            iniciarObserverAbrazo();
-
-        }, 1000);
+            },
+            3000
+        );
 
     }
 );
 
 
 /* =====================================================
-   OBSERVADOR DEL ABRAZO
+   LLUVIA DE CUMPLEAÑOS
 ===================================================== */
 
-function iniciarObserverAbrazo() {
+function iniciarLluviaCumpleanos() {
 
-
-    /*
-        Si el navegador soporta
-        IntersectionObserver.
-    */
-
-    if (
-        "IntersectionObserver"
-        in window
-    ) {
-
-
-        const observer =
-            new IntersectionObserver(
-
-                (entries) => {
-
-
-                    entries.forEach(
-                        (entry) => {
-
-
-                            if (
-                                entry.isIntersecting
-                            ) {
-
-
-                                abrazo.classList.add(
-                                    "visible"
-                                );
-
-
-                                /*
-                                    Dejamos de observar
-                                    después de aparecer.
-                                */
-
-                                observer.unobserve(
-                                    entry.target
-                                );
-
-                            }
-
-                        }
-                    );
-
-                },
-
-                {
-
-                    threshold: .35
-
-                }
-
-            );
-
-
-        observer.observe(
-            abrazo
+    const lluvia =
+        document.createElement(
+            "div"
         );
 
+    lluvia.className =
+        "lluvia-cumpleanos";
 
-    } else {
-
-
-        /*
-            Compatibilidad con navegadores
-            antiguos.
-        */
-
-        abrazo.classList.add(
-            "visible"
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-   INDICADORES DE LA GALERÍA
-
-   Sincroniza los tres puntos inferiores
-   con la fotografía que está visible.
-===================================================== */
-
-const galeria =
-    document.querySelector(
-        ".galeria"
-    );
-
-const fotosGaleria =
-    document.querySelectorAll(
-        ".galeria .foto"
-    );
-
-const indicadoresGaleria =
-    document.querySelectorAll(
-        ".indicadores-fotos .indicador"
+    document.body.appendChild(
+        lluvia
     );
 
 
-if (
+    const detalles = [
 
-    galeria &&
+        "🎈",
+        "🎉",
+        "🎊",
+        "✨",
+        "🎁",
+        "🥳",
 
-    fotosGaleria.length &&
+        "🎈",
+        "🎊",
+        "✨",
+        "🎉",
+        "🎈",
+        "🎁",
 
-    indicadoresGaleria.length
+        "🎊",
+        "✨",
+        "🥳",
+        "🎈",
+        "🎉",
+        "🎊",
 
-) {
+        "✨",
+        "🎁",
+        "🎈",
+        "🥳",
+        "🎉",
+        "🎊",
 
+        "✨",
+        "🎈",
+        "🎉",
+        "🎁",
+        "🎊",
+        "🥳",
 
-    function actualizarIndicadoresGaleria() {
-
-
-        const centroGaleria =
-
-            galeria.scrollLeft +
-
-            (
-                galeria.clientWidth /
-                2
-            );
-
-
-        let indiceActivo = 0;
-
-        let menorDistancia =
-            Infinity;
-
-
-        fotosGaleria.forEach(
-            (foto, indice) => {
-
-
-                const centroFoto =
-
-                    foto.offsetLeft +
-
-                    (
-                        foto.offsetWidth /
-                        2
-                    );
-
-
-                const distancia =
-
-                    Math.abs(
-
-                        centroFoto -
-                        centroGaleria
-
-                    );
+        "🎈",
+        "🎉",
+        "🎊",
+        "✨",
+        "🎁"
+    ];
 
 
-                if (
-                    distancia <
-                    menorDistancia
-                ) {
+    detalles.forEach(
+        (
+            detalle,
+            indice
+        ) => {
 
-
-                    menorDistancia =
-                        distancia;
-
-
-                    indiceActivo =
-                        indice;
-
-                }
-
-            }
-        );
-
-
-        indicadoresGaleria.forEach(
-            (indicador, indice) => {
-
-
-                indicador.classList.toggle(
-
-                    "activo",
-
-                    indice ===
-                    indiceActivo
-
+            const elemento =
+                document.createElement(
+                    "div"
                 );
 
-            }
-        );
+            elemento.className =
+                "detalle-cumpleanos";
 
-    }
+            elemento.textContent =
+                detalle;
 
 
-    /*
-        Actualizar al deslizar.
-    */
+            /* Posición horizontal */
 
-    galeria.addEventListener(
+            elemento.style.left =
+                (
+                    Math.random() * 100
+                ) + "%";
 
-        "scroll",
 
-        actualizarIndicadoresGaleria,
+            /* Tamaño */
 
-        {
-            passive: true
+            elemento.style.fontSize =
+                (
+                    1.3 +
+                    Math.random() * 1.5
+                ) + "rem";
+
+
+            /* Pequeña variación */
+
+            elemento.style.marginLeft =
+                (
+                    -20 +
+                    Math.random() * 40
+                ) + "px";
+
+
+            /* Aparición escalonada */
+
+            elemento.style.animationDelay =
+                (
+                    indice * 0.12
+                ) + "s";
+
+
+            /* Velocidad */
+
+            elemento.style.animationDuration =
+                (
+                    4 +
+                    Math.random() * 2.5
+                ) + "s";
+
+
+            lluvia.appendChild(
+                elemento
+            );
+
         }
-
     );
 
 
-    /*
-        Actualizar al cambiar
-        el tamaño de la pantalla.
-    */
-
-    window.addEventListener(
-
-        "resize",
-
-        actualizarIndicadoresGaleria
-
-    );
-
-
-    /*
-        Estado inicial.
-    */
+    /* ---------------------------------------------
+       ELIMINAR LA LLUVIA
+       después de terminar
+    --------------------------------------------- */
 
     setTimeout(
+        () => {
 
-        actualizarIndicadoresGaleria,
+            lluvia.remove();
 
-        100
-
+        },
+        8500
     );
 
 }
