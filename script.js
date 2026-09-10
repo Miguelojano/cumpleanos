@@ -914,17 +914,23 @@ if (
                         true;
 
 
-                    fotosGaleria[
-                        nuevoIndice
-                    ].scrollIntoView({
-
-                        behavior: "smooth",
-
-                        block: "nearest",
-
-                        inline: "center"
-
-                    });
+                    const fotoDestino =
+                         fotosGaleria[nuevoIndice];
+                     
+                     const posicionDestino =
+                         fotoDestino.offsetLeft -
+                         (
+                             (galeria.clientWidth -
+                             fotoDestino.offsetWidth) / 2
+                         );
+                     
+                     galeria.scrollTo({
+                     
+                         left: posicionDestino,
+                     
+                         behavior: "auto"
+                     
+                     });
 
 
                     /*
