@@ -361,14 +361,28 @@ botonCarta.addEventListener(
 
         botonCarta.disabled = true;
 
-
-        /*
-            Abrimos visualmente el sobre.
-        */
-
-        sobre.classList.add(
-            "abriendo"
-        );
+         /*
+             Pequeño desplazamiento hacia abajo
+             al descubrir la carta.
+         */
+         
+         setTimeout(() => {
+         
+             window.scrollBy({
+                 top: 120,
+                 behavior: "smooth"
+             });
+         
+         }, 100);
+         
+         
+         /*
+             Abrimos visualmente el sobre.
+         */
+         
+         sobre.classList.add(
+             "abriendo"
+         );
 
 
         /*
