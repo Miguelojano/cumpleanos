@@ -677,16 +677,11 @@ if (
     /* =================================================
        CONTROL DE SWIPE EN MÓVIL
 
-       Cada gesto solo permite avanzar o retroceder
-       UNA fotografía.
+       Cada gesto permite avanzar o retroceder
+       SOLO UNA fotografía.
 
-       Un swipe rápido no puede saltar de:
-       
-           Foto 1 → Foto 3
-       
-       ni:
-       
-           Foto 3 → Foto 1
+       Un swipe rápido no puede saltar
+       de la foto 1 a la 3.
     ================================================== */
 
     let posicionInicialScroll = 0;
@@ -717,7 +712,7 @@ if (
 
             "touchstart",
 
-            (e) => {
+            () => {
 
                 if (bloqueandoSwipe) {
                     return;
@@ -799,8 +794,10 @@ if (
                         2
                     );
 
+               let indiceActual = 0;
 
-                let indiceActual = 0;
+               let nuevoIndice =
+                  indiceActual;
 
                 let menorDistanciaInicial =
                     Infinity;
@@ -854,13 +851,10 @@ if (
                     del swipe.
                 */
 
-                let nuevoIndice =
-                    indiceActual;
-
 
                 /*
-                    Swipe hacia la derecha:
-                    retroceder SOLO una foto.
+                    Swipe hacia la izquierda:
+                    avanzar SOLO una foto.
                 */
 
                 if (
@@ -870,11 +864,11 @@ if (
 
                     nuevoIndice =
 
-                        Math.max(
+                        Math.min(
 
-                            0,
+                            fotosGaleria.length - 1,
 
-                            indiceActual - 1
+                            indiceActual + 1
 
                         );
 
@@ -882,8 +876,8 @@ if (
 
 
                 /*
-                    Swipe hacia la izquierda:
-                    avanzar SOLO una foto.
+                    Swipe hacia la derecha:
+                    retroceder SOLO una foto.
                 */
 
                 else if (
@@ -893,11 +887,11 @@ if (
 
                     nuevoIndice =
 
-                        Math.min(
+                        Math.max(
 
-                            fotosGaleria.length - 1,
+                            0,
 
-                            indiceActual + 1
+                            indiceActual - 1
 
                         );
 
