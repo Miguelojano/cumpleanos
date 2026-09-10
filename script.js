@@ -164,9 +164,6 @@ corazon.addEventListener(
 
             /* =========================================
                MOSTRAR MENSAJE
-
-               El mensaje reemplaza el texto inicial
-               "[Nombre], toca el corazón."
             ========================================= */
 
             instruccion.classList.remove(
@@ -675,5 +672,298 @@ if (
         100
 
     );
+
+
+    /* =================================================
+       CONTROL DE SWIPE EN MÓVIL
+
+       Cada gesto solo permite avanzar o retroceder
+       UNA fotografía.
+
+       Un swipe rápido no puede saltar de:
+       
+           Foto 1 → Foto 3
+       
+       ni:
+       
+           Foto 3 → Foto 1
+    ================================================== */
+
+    let posicionInicialScroll = 0;
+
+    let desplazamientoAcumulado = 0;
+
+    let bloqueandoSwipe = false;
+
+
+    /*
+        Detectamos solamente dispositivos táctiles.
+    */
+
+    const esDispositivoTactil =
+        window.matchMedia(
+            "(pointer: coarse)"
+        ).matches;
+
+
+    if (esDispositivoTactil) {
+
+
+        /* ---------------------------------------------
+           INICIO DEL GESTO
+        --------------------------------------------- */
+
+        galeria.addEventListener(
+
+            "touchstart",
+
+            (e) => {
+
+                if (bloqueandoSwipe) {
+                    return;
+                }
+
+
+                posicionInicialScroll =
+                    galeria.scrollLeft;
+
+
+                desplazamientoAcumulado =
+                    0;
+
+            },
+
+            {
+                passive: true
+            }
+
+        );
+
+
+        /* ---------------------------------------------
+           MOVIMIENTO DEL DEDO
+        --------------------------------------------- */
+
+        galeria.addEventListener(
+
+            "touchmove",
+
+            () => {
+
+                if (bloqueandoSwipe) {
+                    return;
+                }
+
+
+                desplazamientoAcumulado =
+
+                    galeria.scrollLeft -
+                    posicionInicialScroll;
+
+            },
+
+            {
+                passive: true
+            }
+
+        );
+
+
+        /* ---------------------------------------------
+           FIN DEL GESTO
+        --------------------------------------------- */
+
+        galeria.addEventListener(
+
+            "touchend",
+
+            () => {
+
+
+                if (bloqueandoSwipe) {
+                    return;
+                }
+
+
+                /*
+                    Calculamos qué foto estaba
+                    inicialmente visible.
+                */
+
+                const centroInicial =
+
+                    posicionInicialScroll +
+
+                    (
+                        galeria.clientWidth /
+                        2
+                    );
+
+
+                let indiceActual = 0;
+
+                let menorDistanciaInicial =
+                    Infinity;
+
+
+                fotosGaleria.forEach(
+                    (foto, indice) => {
+
+
+                        const centroFoto =
+
+                            foto.offsetLeft +
+
+                            (
+                                foto.offsetWidth /
+                                2
+                            );
+
+
+                        const distancia =
+
+                            Math.abs(
+
+                                centroFoto -
+                                centroInicial
+
+                            );
+
+
+                        if (
+                            distancia <
+                            menorDistanciaInicial
+                        ) {
+
+
+                            menorDistanciaInicial =
+                                distancia;
+
+
+                            indiceActual =
+                                indice;
+
+                        }
+
+                    }
+                );
+
+
+                /*
+                    Determinamos la dirección
+                    del swipe.
+                */
+
+                let nuevoIndice =
+                    indiceActual;
+
+
+                /*
+                    Swipe hacia la derecha:
+                    retroceder SOLO una foto.
+                */
+
+                if (
+                    desplazamientoAcumulado >
+                    20
+                ) {
+
+                    nuevoIndice =
+
+                        Math.max(
+
+                            0,
+
+                            indiceActual - 1
+
+                        );
+
+                }
+
+
+                /*
+                    Swipe hacia la izquierda:
+                    avanzar SOLO una foto.
+                */
+
+                else if (
+                    desplazamientoAcumulado <
+                    -20
+                ) {
+
+                    nuevoIndice =
+
+                        Math.min(
+
+                            fotosGaleria.length - 1,
+
+                            indiceActual + 1
+
+                        );
+
+                }
+
+
+                /*
+                    Si hubo desplazamiento hacia
+                    una nueva fotografía, forzamos
+                    el destino.
+                */
+
+                if (
+                    nuevoIndice !==
+                    indiceActual
+                ) {
+
+
+                    bloqueandoSwipe =
+                        true;
+
+
+                    fotosGaleria[
+                        nuevoIndice
+                    ].scrollIntoView({
+
+                        behavior: "smooth",
+
+                        block: "nearest",
+
+                        inline: "center"
+
+                    });
+
+
+                    /*
+                        Bloqueamos brevemente nuevos
+                        gestos mientras termina
+                        el desplazamiento.
+                    */
+
+                    setTimeout(
+
+                        () => {
+
+                            bloqueandoSwipe =
+                                false;
+
+                            actualizarIndicadoresGaleria();
+
+                        },
+
+                        550
+
+                    );
+
+                }
+
+            },
+
+            {
+                passive: true
+            }
+
+        );
+
+    }
 
 }
