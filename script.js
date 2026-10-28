@@ -101,6 +101,32 @@ const abrazo =
 
 let contador = 0;
 
+let temporizadorUltimo = null;
+
+/*
+    Cambia el texto principal con un
+    desvanecimiento suave (sale y entra).
+*/
+
+function mostrarTexto(texto) {
+
+    instruccion.classList.add(
+        "desvanecido"
+    );
+
+    setTimeout(() => {
+
+        instruccion.textContent =
+            texto;
+
+        instruccion.classList.remove(
+            "desvanecido"
+        );
+
+    }, 450);
+
+}
+
 
 /* =====================================================
    PORCENTAJES
@@ -174,20 +200,9 @@ corazon.addEventListener(
                "[Nombre], toca el corazón."
             ========================================= */
 
-            instruccion.classList.remove(
-                "visible"
+            mostrarTexto(
+                mensajes[contador]
             );
-
-            instruccion.textContent =
-                mensajes[contador];
-
-            setTimeout(() => {
-
-                instruccion.classList.add(
-                    "visible"
-                );
-
-            }, 50);
 
 
             /* =========================================
@@ -250,12 +265,20 @@ corazon.addEventListener(
                 mensajes.length
             ) {
 
-                setTimeout(() => {
+                /*
+                    Dejamos leer el último mensaje
+                    unos segundos antes de invitar
+                    a tocar otra vez.
+                */
 
-                    instruccion.textContent =
-                        "Toca por última vez ❤️";
+                temporizadorUltimo =
+                    setTimeout(() => {
 
-                }, 600);
+                        mostrarTexto(
+                            "Toca por última vez ❤️"
+                        );
+
+                    }, 4500);
 
             }
 
@@ -268,6 +291,10 @@ corazon.addEventListener(
         /* =================================================
            8.º CLIC
         ================================================== */
+
+        clearTimeout(
+            temporizadorUltimo
+        );
 
         transicionarEscena();
 
