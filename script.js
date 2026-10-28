@@ -4,19 +4,19 @@
 
 const mensajes = [
 
-    "[Mensaje 1]",
+    "Desde que llegaste, mis días tienen otro color.",
 
-    "[Mensaje 2]",
+    "Me encanta cómo me haces reír hasta cuando estoy seria.",
 
-    "[Mensaje 3]",
+    "Contigo hasta lo más simple se siente especial.",
 
-    "[Mensaje 4]",
+    "Eres mi calma después de los días largos.",
 
-    "[Mensaje 5]",
+    "Gracias por abrazarme justo cuando más lo necesito.",
 
-    "[Mensaje 6]",
+    "Si pudiera elegir de nuevo, te elegiría mil veces.",
 
-    "[Mensaje 7]"
+    "Hoy el mundo celebra al hombre que más amo."
 
 ];
 
