@@ -8,15 +8,13 @@ const mensajes = [
 
     "Me encanta cómo me haces reír hasta cuando estoy seria.",
 
-    "Contigo hasta lo más simple se siente especial.",
-
     "Eres mi calma después de los días largos.",
-
-    "Gracias por abrazarme justo cuando más lo necesito.",
 
     "Si pudiera elegir de nuevo, te elegiría mil veces.",
 
-    "Hoy el mundo celebra al hombre que más amo."
+    "Hoy el mundo celebra al hombre que más amo.",
+
+    "Toca por última vez ❤️"
 
 ];
 
@@ -101,8 +99,6 @@ const abrazo =
 
 let contador = 0;
 
-let temporizadorUltimo = null;
-
 /*
     Cambia el texto principal con un
     desvanecimiento suave (sale y entra).
@@ -134,17 +130,15 @@ function mostrarTexto(texto) {
 
 const porcentajes = [
 
-    15,
+    17,
 
-    28,
+    33,
 
-    41,
+    50,
 
-    55,
+    67,
 
-    70,
-
-    85,
+    83,
 
     100
 
@@ -167,9 +161,7 @@ const animaciones = [
 
     "corazon-fuerte",
 
-    "corazon-brillo",
-
-    "corazon-fuerte"
+    "corazon-brillo"
 
 ];
 
@@ -184,7 +176,7 @@ corazon.addEventListener(
 
 
         /* =============================================
-           PRIMEROS 7 CLICS
+           PRIMEROS CLICS (MENSAJES)
         ============================================= */
 
         if (
@@ -256,45 +248,14 @@ corazon.addEventListener(
             contador++;
 
 
-            /* =========================================
-               DESPUÉS DEL 7.º CLIC
-            ========================================= */
-
-            if (
-                contador ===
-                mensajes.length
-            ) {
-
-                /*
-                    Dejamos leer el último mensaje
-                    unos segundos antes de invitar
-                    a tocar otra vez.
-                */
-
-                temporizadorUltimo =
-                    setTimeout(() => {
-
-                        mostrarTexto(
-                            "Toca por última vez ❤️"
-                        );
-
-                    }, 4500);
-
-            }
-
-
             return;
 
         }
 
 
         /* =================================================
-           8.º CLIC
+           ÚLTIMO CLIC (CORAZÓN GIGANTE)
         ================================================== */
-
-        clearTimeout(
-            temporizadorUltimo
-        );
 
         transicionarEscena();
 
