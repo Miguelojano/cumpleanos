@@ -1473,7 +1473,7 @@ body::before {
 
 .carta.abierta {
 
-    max-height: 2000px;
+    max-height: 4000px;
 
     opacity: 1;
 
@@ -1605,6 +1605,22 @@ body::before {
     font-size: 1rem;
 
     color: #60484b;
+
+}
+
+.destacado-carta {
+
+    display: block;
+
+    margin: 0 0 1.6em;
+
+    text-align: center;
+
+    font-size: 1.1rem;
+
+    color: #8a3f4b;
+
+    letter-spacing: .5px;
 
 }
 
