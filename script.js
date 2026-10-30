@@ -4,15 +4,15 @@
 
 const mensajes = [
 
-    "Desde que llegaste, mis días tienen otro color.",
+    "No te estaba buscando, pero apareciste y despertaste en mí ganas enormes de conocerte.",
 
-    "Me encanta cómo me haces reír hasta cuando estoy seria.",
+    "Me encanta cómo empezó lo nuestro: sin planearlo, sin imaginar hasta dónde llegaríamos y con una conexión difícil de explicar.",
 
-    "Eres mi calma después de los días largos.",
+    "Me gusta quién eres, cómo me miras, cómo me haces reír y, sobre todo, cómo somos cuando estamos juntos.",
 
-    "Si pudiera elegir de nuevo, te elegiría mil veces.",
+    "Me encanta la confianza que tenemos, poder ser nosotros mismos, hablar de todo y sentirnos tan cómodos juntos.",
 
-    "Hoy el mundo celebra al hombre que más amo.",
+    "No sé todo lo que nos espera, pero sí sé que hoy te elijo, que me encanta lo que estamos construyendo y que quiero seguir viviendo muchas cosas contigo.",
 
     "Toca por última vez ❤️"
 
